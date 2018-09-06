@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FlowListService } from '../../services/flow-list.service';
 import { FlowModel } from "../../models/flow.model";
 
@@ -8,7 +8,7 @@ import { FlowModel } from "../../models/flow.model";
   styleUrls: ['./flowlist.component.css']
 })
 export class FlowlistComponent implements OnInit {
-
+  @Input() filterText:string;
   constructor(private flowListService: FlowListService) { }
 
   ngOnInit() {
