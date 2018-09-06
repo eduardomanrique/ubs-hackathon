@@ -6,3 +6,7 @@
   right: 0;
   bottom: 0;
 }
+
+.step-wrapper input {
+  width: 500px;
+}

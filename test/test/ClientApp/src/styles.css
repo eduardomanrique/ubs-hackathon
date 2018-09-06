@@ -10,6 +10,13 @@ button.btn-fixed {
   position: fixed;
 }
 
+button.btn-pin-right.btn-right-1 {
+  right: 20px;
+}
+button.btn-pin-right.btn-right-2 {
+  right: 150px;
+}
+
 button.btn-pin-bottom {
   bottom: 20px;
 }
