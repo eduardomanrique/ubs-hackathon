@@ -1,8 +1,6 @@
 matrix:
   include:
     - language: java
-      jdk:
-        - oraclejdk8
       install: true
 
       before_install:
@@ -12,6 +10,11 @@ matrix:
         - gradle check
 
     - sudo: required
+      dist: trusty
+
+      cache:
+        directories:
+          - node_modules
       addons:
         chrome: stable
 
@@ -29,5 +32,7 @@ matrix:
         - npm install -g @angular/cli
 
       script:
-        - ng build --prod --aot
-        - ng test
+        - npm run lint
+        - npm run test:headless
+        - npm run build
+        - xvfb-run npm run e2e
