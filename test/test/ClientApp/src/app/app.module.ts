@@ -1,17 +1,9 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
-import { DndModule } from 'ng2-dnd';
-
-import {
-  MatButtonModule, MatCardModule, MatCheckboxModule,
-  MatExpansionModule, MatFormFieldModule, MatIconModule,
-  MatSelectModule,
-  MatDialogModule,
-  MatInputModule, MatSidenavModule, MatToolbarModule, MatTooltipModule
-} from '@angular/material';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatSidenavModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -60,7 +52,7 @@ import { ConfirmdialogComponent } from './dialogs/confirmdialog/confirmdialog.co
       { path: 'home', component: HomeComponent },
       { path: '**', redirectTo: 'home' }
     ]),
-    DndModule.forRoot()
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

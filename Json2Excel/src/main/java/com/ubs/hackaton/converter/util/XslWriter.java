@@ -1,6 +1,5 @@
 package com.ubs.hackaton.converter.util;
 
-import com.ubs.hackaton.converter.dataobject.Data;
 import com.ubs.hackaton.converter.dataobject.Opportunity;
 import org.apache.poi.hssf.usermodel.HSSFPalette;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -10,14 +9,11 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellUtil;
-import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemStreamException;
-import org.springframework.batch.item.ItemStreamWriter;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.WritableResource;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,8 +95,7 @@ public class XslWriter {
 
         Cell c = r.createCell(0);
 
-        for (String field: fields)
-        {
+        for (String field : fields) {
             c.setCellValue(field);
             s.setColumnWidth(columnIndex++, poiWidth(18.0));
             c = r.createCell(columnCell++);
@@ -113,10 +108,8 @@ public class XslWriter {
         return (int) Math.round(width * 256 + 200);
     }
 
-    public void write(List<? extends Data> items) throws Exception {
-    }
 
-    public void write(Data items) throws Exception {
+    public void write(List<Opportunity> opportunities) throws Exception {
         HSSFSheet s = wb.getSheetAt(0);
 
         CellStyle cellStyle = wb.createCellStyle();
@@ -129,8 +122,7 @@ public class XslWriter {
         cellStyle.setBorderTop(BorderStyle.HAIR);
         cellStyle.setTopBorderColor(IndexedColors.CORAL.getIndex());
 
-        for (Opportunity op:items.getOpportunities())
-        {
+        for (Opportunity op : opportunities) {
             int columnIndex = 0;
 
             Row r = s.createRow(row++);
