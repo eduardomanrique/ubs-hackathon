@@ -13,11 +13,7 @@ export class FlowListService {
     let data = this.storageService.getObj('flows');
 
     if (!data || !data.length) {
-      data = [
-        new FlowModel("test 1"),
-        new FlowModel("test 2"),
-        new FlowModel("test 3")
-      ];
+      data = [];
       this.storageService.setObj('flows', data);
     }
 
