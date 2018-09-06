@@ -13,18 +13,14 @@ export class AppComponent {
   public addPageClass: string;
   
   addFlowBtnHandler() {
-    this.addPageClass = "hide-animation";
-    setTimeout(() => {
-      this.addPageVisible = true;
-      this.addPageClass = "";
-    }, 1000);
+    this.addPageClass = "show-animation";
+    this.addPageVisible = true;
   }
 
   cancelBtnHandler() {
-    this.addPageClass = "show-animation";
+    this.addPageClass = "hide-animation";
     setTimeout(() => {
       this.addPageVisible = false;
-      this.addPageClass = "";
-    }, 1000);
+    }, 300);
   }
 }
