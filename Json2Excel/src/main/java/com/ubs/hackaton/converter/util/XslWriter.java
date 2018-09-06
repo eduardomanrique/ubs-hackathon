@@ -18,20 +18,17 @@ import org.springframework.core.io.WritableResource;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Service
-public class XslWriter implements ItemStreamWriter<Data> {
+public class XslWriter {
     private HSSFWorkbook wb;
     private WritableResource resource;
     private int row;
 
-    @Override
-    public void open(ExecutionContext executionContext) throws ItemStreamException {
-
-    }
 
     public void open() throws ItemStreamException {
         wb = new HSSFWorkbook();
@@ -201,19 +198,10 @@ public class XslWriter implements ItemStreamWriter<Data> {
         }
     }
 
-    @Override
-    public void update(ExecutionContext executionContext) throws ItemStreamException {
-    }
+    public void write(OutputStream out) throws ItemStreamException {
 
-    @Override
-    public void close() throws ItemStreamException {
-        if (wb == null) {
-            return;
-        }
-
-        try (BufferedOutputStream bos = new BufferedOutputStream(resource.getOutputStream())) {
-            wb.write(bos);
-            bos.flush();
+        try {
+            wb.write(out);
             wb.close();
         } catch (Exception ex) {
             throw new ItemStreamException("Error writing to output file", ex);

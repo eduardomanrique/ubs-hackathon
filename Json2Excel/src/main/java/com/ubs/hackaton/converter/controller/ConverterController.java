@@ -24,13 +24,15 @@ public class ConverterController {
     @Autowired
     private XslWriter xslWriter;
 
-    @PostMapping("/convertToExcel")
-    public String convertToExcel(@Valid @RequestBody Data data, HttpServletResponse response) throws Exception {
+    @PostMapping(value = "/convertToExcel", produces = "application/vnd.ms.excel")
+    public void convertToExcel(@Valid @RequestBody Data data, HttpServletResponse response) throws Exception {
 
         xslWriter.open();
         xslWriter.write(data);
-        xslWriter.close();
 
-        return "Done";
+        xslWriter.write(response.getOutputStream());
+
+        response.setHeader("Content-Disposition", "attachment; filename=report.xls");
+        response.flushBuffer();
     }
 }
