@@ -25,3 +25,7 @@ by default-> 10
   - Revenue brutto = Revenue brutto*(1-tax rate)
 
 5. Generate report.
+
+
+## Endpoint with Opportunities
+` curl -i -H "Accept: application/json" "http://mockbin.org/bin/de35bfe0-fede-4e51-b413-f1f4f362e8ba/view"`
