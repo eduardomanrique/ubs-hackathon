@@ -77,12 +77,16 @@ export class AddFlowPageComponent implements OnInit {
 
   validateModel() {
     const err = [];
+    const flows = this.flowListService.getFlows();
 
     if (!this.model.title) {
       err.push("Name is mandatory");
     }
     if (this.model.steps.length == 0) {
       err.push("There should be at least 1 step in the flow");
+    }
+    if (flows.filter(item => item.title === this.model.title).length) {
+      err.push(`Flow with name: ${this.model.title} already exists, try to choose another name`);
     }
 
     return err;

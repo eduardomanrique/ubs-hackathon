@@ -9,6 +9,7 @@ import {
   MatButtonModule, MatCardModule, MatCheckboxModule,
   MatExpansionModule, MatFormFieldModule, MatIconModule,
   MatSelectModule,
+  MatDialogModule,
   MatInputModule, MatSidenavModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,8 +23,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { RuleGroupComponent } from './components/rule-group/rule-group.component';
 import { SimpleRuleComponent } from './components/simple-rule/simple-rule.component';
-
-
+import { ConfirmdialogComponent } from './dialogs/confirmdialog/confirmdialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { SimpleRuleComponent } from './components/simple-rule/simple-rule.compon
     FlowItemComponent,
     AddFlowPageComponent,
     RuleGroupComponent,
-    SimpleRuleComponent
+    SimpleRuleComponent,
+    ConfirmdialogComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +45,7 @@ import { SimpleRuleComponent } from './components/simple-rule/simple-rule.compon
     MatSidenavModule,
     MatToolbarModule,
     MatSelectModule,
+    MatDialogModule,
     MatIconModule,
     MatFormFieldModule,
     MatTooltipModule,
