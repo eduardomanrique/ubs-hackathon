@@ -5,4 +5,35 @@
   left: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.step-wrapper input {
+  width: 500px;
+}
+
+.step-wrapper .mat-form-field {
+  width: 90%;
+}
+
+.steps-container .step-card {
+  width: 800px;
+  display: block;
+  margin-top: 10px;
+}
+
+  .steps-container .dnd-drag-over {
+    background: black;
+  }
+
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  -ms-align-items: center;
+  -o-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 10px;
+  overflow: auto;
 }

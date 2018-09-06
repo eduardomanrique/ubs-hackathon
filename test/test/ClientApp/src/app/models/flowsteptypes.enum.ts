@@ -1,4 +1,4 @@
 export enum FlowStepTypes {
-  Request,
-  Execute
+  API = 1,
+  RULE = 2
 }

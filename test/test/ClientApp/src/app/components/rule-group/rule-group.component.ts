@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import RuleEngine from '../../util/rule-engine';
+import { Component, Input, OnInit } from '@angular/core';
+import { FlowModel } from "../../models/flow.model";
 
 @Component({
   selector: 'app-rule-group',
@@ -7,6 +7,8 @@ import RuleEngine from '../../util/rule-engine';
   styleUrls: ['./rule-group.component.css']
 })
 export class RuleGroupComponent implements OnInit {
+
+  @Input() model: FlowModel;
 
   constructor() { }
 
@@ -31,7 +33,6 @@ $entity.xyz = 'XYZ'
 
   setPos(index) {
     this.pos = index;
-    console.log(index)
   }
 
   textChangedHandler(event: any, rule: any) {
@@ -42,7 +43,7 @@ $entity.xyz = 'XYZ'
 
   addRule() {
     this.rules.push({
-      name: 'Unnamed',
+      name: '',
       condition: '',
       action: ''
     });
@@ -62,6 +63,7 @@ $entity.xyz = 'XYZ'
   }
 
   ngOnInit() {
+
   }
 
 }

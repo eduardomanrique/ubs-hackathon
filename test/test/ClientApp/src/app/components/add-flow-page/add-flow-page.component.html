@@ -1,17 +1,55 @@
 <div class="page-wrapper">
   <mat-toolbar color="warn">
     <mat-form-field class="search-form">
-      <input type="search" placeholder="title" matInput />
+      <input type="search" (input)="titleChangedHandler($event.target.value)" placeholder="title" matInput />
     </mat-form-field>
 
     <span class="fill-space"></span>
 
     <button mat-icon-button (click)="saveBtnHandler()">
-      <mat-icon matTooltip="Save" aria-label="Example icon-button with a heart icon"><mat-icon>save</mat-icon></mat-icon>
+      <mat-icon matTooltip="Save" aria-label="Save">save</mat-icon>
     </button>
 
     <button mat-icon-button (click)="cancelBtnHandler()">
-      <mat-icon matTooltip="Close" aria-label="Example icon-button with a heart icon"><mat-icon>clear</mat-icon></mat-icon>
+      <mat-icon matTooltip="Close" aria-label="Close">clear</mat-icon>
     </button>
   </mat-toolbar>
+
+  <div class="steps-container">
+    <div *ngIf="this.model.steps.length === 0">Add steps to see the list</div>
+    <div *ngFor="let step of this.model.steps; let I = index">
+      <mat-card *ngIf="step.stepType == 1" class="step-card">
+        <div class="step-wrapper">
+          
+          <mat-form-field>
+            <mat-select placeholder="Select an application" (selectionChange)="stepUrlChangedHandler($event.value, step)">
+              <mat-option *ngFor="let item of this.availableUrls" [value]="item">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-icon-button>
+            <mat-icon matTooltip="Close" aria-label="Close" (click)="removeStepHandler(I)">clear</mat-icon>
+          </button>
+        </div>
+      </mat-card>
+
+      <app-simple-rule *ngIf="step.stepType == 2"
+                       class="step-card"
+                       (removeButtonClick)="removeStepHandler(I)"
+                       [model]="step">
+        
+      </app-simple-rule>
+      
+    </div>
+  </div>
+
+  <button mat-raised-button color="warn" class="btn-fixed btn-pin-bottom btn-pin-right btn-right-1" (click)="addEmptyStepHandler('rule')">
+    <mat-icon aria-label="rule">notes</mat-icon> Add Rule
+  </button>
+
+  <button mat-raised-button color="warn" class="btn-fixed btn-pin-bottom btn-pin-right btn-right-2" (click)="addEmptyStepHandler('url')">
+    <mat-icon aria-label="api">cloud</mat-icon> Add API
+  </button>
 </div>

@@ -2,7 +2,16 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSidenavModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
+
+import { DndModule } from 'ng2-dnd';
+
+import {
+  MatButtonModule, MatCardModule, MatCheckboxModule,
+  MatExpansionModule, MatFormFieldModule, MatIconModule,
+  MatSelectModule,
+  MatDialogModule,
+  MatInputModule, MatSidenavModule, MatToolbarModule, MatTooltipModule
+} from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -13,8 +22,8 @@ import { FlowlistComponent } from './components/flowlist/flowlist.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { RuleGroupComponent } from './components/rule-group/rule-group.component';
-
-
+import { SimpleRuleComponent } from './components/simple-rule/simple-rule.component';
+import { ConfirmdialogComponent } from './dialogs/confirmdialog/confirmdialog.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +33,9 @@ import { RuleGroupComponent } from './components/rule-group/rule-group.component
     FlowlistComponent,
     FlowItemComponent,
     AddFlowPageComponent,
-    RuleGroupComponent
+    RuleGroupComponent,
+    SimpleRuleComponent,
+    ConfirmdialogComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +44,8 @@ import { RuleGroupComponent } from './components/rule-group/rule-group.component
     MatCheckboxModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatSelectModule,
+    MatDialogModule,
     MatIconModule,
     MatFormFieldModule,
     MatTooltipModule,
@@ -46,7 +59,8 @@ import { RuleGroupComponent } from './components/rule-group/rule-group.component
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: '**', redirectTo: 'home' }
-    ])
+    ]),
+    DndModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -27,4 +27,17 @@ export class FlowListService {
   getFlows():FlowModel[] {
     return this.flows;
   }
+
+  addFlow(model: FlowModel) {
+    this.flows.push(model);
+    this.storageService.setObj('flows', this.flows);
+  }
+
+  removeFlow(title: string) {
+    const index = this.flows.findIndex(flow => flow.title === title);
+    if (index >= 0) {
+      this.flows.splice(index, 1);
+      this.storageService.setObj('flows', this.flows);
+    }
+  }
 }
