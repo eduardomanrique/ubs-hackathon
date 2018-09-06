@@ -1,0 +1,24 @@
+<div *ngIf="!this.addPageVisible">
+  <mat-toolbar color="primary">
+    <span class="d-none d-sm-block">UBS Flow</span>
+
+    <span class="fill-space"></span>
+
+    <mat-form-field class="search-form">
+      <input type="search" placeholder="search" matInput />
+    </mat-form-field>
+
+  </mat-toolbar>
+
+  <app-flowlist></app-flowlist>
+
+  <button class="btn-fixed btn-pin-bottom btn-pin-right" mat-fab color="primary" (click)="addFlowBtnHandler()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<div *ngIf="this.addPageVisible" [ngClass]="this.addPageClass">
+  <app-add-flow-page (cancelButtonClick)="cancelBtnHandler()">
+  
+  </app-add-flow-page>
+</div>

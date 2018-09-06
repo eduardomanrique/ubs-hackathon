@@ -1,0 +1,17 @@
+<div class="page-wrapper">
+  <mat-toolbar color="warn">
+    <mat-form-field class="search-form">
+      <input type="search" placeholder="title" matInput />
+    </mat-form-field>
+
+    <span class="fill-space"></span>
+
+    <button mat-icon-button (click)="saveBtnHandler()">
+      <mat-icon aria-label="Example icon-button with a heart icon"><mat-icon>save</mat-icon></mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="cancelBtnHandler()">
+      <mat-icon aria-label="Example icon-button with a heart icon"><mat-icon>clear</mat-icon></mat-icon>
+    </button>
+  </mat-toolbar>
+</div>

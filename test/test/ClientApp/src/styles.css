@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+button.btn-fixed {
+  position: fixed;
+}
+
+button.btn-pin-bottom {
+  bottom: 20px;
+}
+
+button.btn-pin-right {
+  right: 20px;
+}
+
+.fill-space {
+  flex: 1 1 auto;
+}
+
+.search-form {
+  width: 400px;
+  overflow: hidden;
+  padding-top: 20px;
+}
+
+button, button:focus, button:active {
+  outline: none;
+}
+
+.display-none {
+  display: none;
+}
+
+.hide-animation {
+  -ms-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+
+  -ms-animation: hide-animation 0.3s forwards;
+  -webkit-animation: hide-animation 0.3s forwards;
+  animation: hide-animation 0.3s forwards;
+}
+
+.show-animation {
+  -ms-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+
+  -ms-animation: show-animation 0.3s forwards;
+  -webkit-animation: show-animation 0.3s forwards;
+  animation: show-animation 0.3s forwards;
+}
+
+@keyframes hide-animation {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100%;
+  }
+}
+@keyframes show-animation {
+  from {
+    top: 100%;
+  }
+
+  to {
+    top: 0;
+  }
+}

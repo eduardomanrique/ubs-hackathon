@@ -1,0 +1,18 @@
+.body-wrapper {
+  border: 1px solid black;
+  display: inline-block;
+  margin: 5px;
+  width: 300px;
+  padding: 3px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.title {
+  font-weight: bold;
+  font-family: "Segoe UI", Arial;
+}
+
+.btn-container {
+  display: flex;
+}

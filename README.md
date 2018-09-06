@@ -1,2 +1,0 @@
-# ubs-hackathon
-UBS Hackathon
