@@ -18,7 +18,7 @@
   <div class="steps-container">
     <div *ngIf="this.model.steps.length === 0">Add steps to see the list</div>
     <div *ngFor="let step of this.model.steps; let I = index">
-      <mat-card *ngIf="step.stepType == 1">
+      <mat-card *ngIf="step.stepType == 1" class="step-card">
         <div class="step-wrapper">
 
           <mat-form-field>
@@ -34,10 +34,11 @@
           </button>
         </div>
       </mat-card>
+      <app-rule-group class="step-card" *ngIf="step.stepType == 2"></app-rule-group>
     </div>
   </div>
 
-  <button mat-raised-button color="warn" class="btn-fixed btn-pin-bottom btn-pin-right btn-right-1" (click)="addEmptyStepHandler()">
+  <button mat-raised-button color="warn" class="btn-fixed btn-pin-bottom btn-pin-right btn-right-1" (click)="addEmptyStepHandler('rule')">
     <mat-icon aria-label="rule">notes</mat-icon> Add Rule
   </button>
 

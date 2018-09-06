@@ -15,7 +15,6 @@ export class RuleGroupComponent implements OnInit {
 
   setPos(index){
     this.pos = index;
-    console.log(index)
   }
 
   textChangedHandler(event:any, rule:any) {
@@ -26,7 +25,7 @@ export class RuleGroupComponent implements OnInit {
 
   addRule(){
     this.rules.push({
-      name: 'Unnamed',
+      name: '',
       condition: '',
       action: ''
     });

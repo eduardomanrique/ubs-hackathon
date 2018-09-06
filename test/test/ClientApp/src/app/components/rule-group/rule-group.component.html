@@ -10,7 +10,7 @@
         hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{rule.name}}
+            {{rule.name || 'Unnamed'}}
           </mat-panel-title>
           <button mat-icon-button color="secondary" (click)="removeRule(rule)">
             <mat-icon aria-label="Remove rule">remove</mat-icon>

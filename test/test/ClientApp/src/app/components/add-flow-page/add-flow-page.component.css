@@ -13,13 +13,15 @@
   width: 500px;
 }
 
-.mat-card {
+.step-wrapper .mat-form-field {
+  width: 90%;
+}
+.steps-container .step-card {
+  width: 800px;
+  display: block;
   margin-top: 10px;
 }
 
-.step-wrapper .mat-form-field {
-  width: 500px;
-}
 
 .steps-container {
   display: flex;

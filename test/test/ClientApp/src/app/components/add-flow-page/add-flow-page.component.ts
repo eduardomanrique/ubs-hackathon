@@ -58,10 +58,19 @@ export class AddFlowPageComponent implements OnInit {
   }
 
   addEmptyStepHandler(stepType: string) {
-    if (stepType === 'url') {
-      const newAPI = new FlowStepModel("BPX", "");
-      newAPI.stepType = FlowStepTypes.API;
-      this.model.steps.push(newAPI);
+
+    switch (stepType) {
+      case 'url':
+        const newApi = new FlowStepModel("BPX", "");
+        newApi.stepType = FlowStepTypes.API;
+        this.model.steps.push(newApi);
+        break;
+      case 'rule':
+        const newRule = new FlowStepModel("BPX", "");
+        newRule.stepType = FlowStepTypes.RULE;
+        this.model.steps.push(newRule);
+        break;
+      default: break;
     }
   }
 
