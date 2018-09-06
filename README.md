@@ -29,3 +29,11 @@ by default-> 10
 
 ## Endpoint with Opportunities
 ` curl -i "http://www.mocky.io/v2/5b90ff993100008200939774"`
+
+
+## TODO: Future improvements:
+ - Voice control to manage business rules
+ - Intelligent incoming data clean-up (ML)
+ - Business rules suggestions (ML)
+ - Historical data analysis: comparison banker revenue during period of time and/or other bankers.
+ - New Data Feeds plug-in engine.
