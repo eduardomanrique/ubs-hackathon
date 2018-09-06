@@ -10,5 +10,5 @@ test/appsettings.Development.json
 test/libman.json
 test/test.csproj
 test/wwwroot/
-test/.gitignore
 package-lock.json
+test/.gitignore
