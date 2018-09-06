@@ -1,3 +1,8 @@
 <div class="flow-items-container">
-  <app-flow-item *ngFor="let flowitem of this.myFlows" [model]="flowitem"></app-flow-item>
+  <div *ngIf="this.myFlows.length == 0" class="no-data">
+    You have no any saved flows, use create button to create one.
+  </div>
+  <div *ngIf="this.myFlows.length != 0">
+    <app-flow-item *ngFor="let flowitem of this.myFlows" [model]="flowitem"></app-flow-item>
+  </div>
 </div>
