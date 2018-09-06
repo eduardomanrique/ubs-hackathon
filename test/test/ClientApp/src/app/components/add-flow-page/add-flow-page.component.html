@@ -15,12 +15,25 @@
     </button>
   </mat-toolbar>
 
-  <div *ngFor="let step of this.model.steps; let I = index">
-    <div *ngIf="step.stepType == 1" class="step-wrapper">
-      <input type="text" [value]="step.content" (input)="stepUrlChangedHandler($event.target.value, step)"/>
-      <button mat-icon-button>
-        <mat-icon matTooltip="Close" aria-label="Close" (click)="removeStepHandler(I)">clear</mat-icon>
-      </button>
+  <div class="steps-container">
+    <div *ngIf="this.model.steps.length === 0">Add steps to see the list</div>
+    <div *ngFor="let step of this.model.steps; let I = index">
+      <mat-card *ngIf="step.stepType == 1">
+        <div class="step-wrapper">
+
+          <mat-form-field>
+            <mat-select placeholder="Select an application" (selectionChange)="stepUrlChangedHandler($event.value, step)">
+              <mat-option *ngFor="let item of this.availableUrls" [value]="item.url">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-icon-button>
+            <mat-icon matTooltip="Close" aria-label="Close" (click)="removeStepHandler(I)">clear</mat-icon>
+          </button>
+        </div>
+      </mat-card>
     </div>
   </div>
 

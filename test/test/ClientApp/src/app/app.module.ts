@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSidenavModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
+import {
+  MatButtonModule, MatCardModule, MatCheckboxModule,
+  MatExpansionModule, MatFormFieldModule, MatIconModule,
+  MatSelectModule,
+  MatInputModule, MatSidenavModule, MatToolbarModule, MatTooltipModule
+} from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -33,6 +38,7 @@ import { RuleGroupComponent } from './components/rule-group/rule-group.component
     MatCheckboxModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatSelectModule,
     MatIconModule,
     MatFormFieldModule,
     MatTooltipModule,

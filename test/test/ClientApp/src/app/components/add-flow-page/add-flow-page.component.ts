@@ -14,6 +14,20 @@ export class AddFlowPageComponent implements OnInit {
   @Output() cancelButtonClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public model: FlowModel;
+  public availableUrls: any[] = [
+    {
+      name: "BPX",
+      url: "http://www.mocky.io/v2/5b90ff993100008200939774"
+    },
+    {
+      name: "Google",
+      url: "www.oogle.com"
+    },
+    {
+      name: "Test",
+      url: "some long long long url goes here"
+    }
+  ];
 
   constructor(private storageService: LocalStorageService) { }
 

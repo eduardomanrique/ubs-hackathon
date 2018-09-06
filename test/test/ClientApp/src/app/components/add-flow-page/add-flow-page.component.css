@@ -5,8 +5,29 @@
   left: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .step-wrapper input {
   width: 500px;
+}
+
+.mat-card {
+  margin-top: 10px;
+}
+
+.step-wrapper .mat-form-field {
+  width: 500px;
+}
+
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  -ms-align-items: center;
+  -o-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 10px;
+  overflow: auto;
 }
