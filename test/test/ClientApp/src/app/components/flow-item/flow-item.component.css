@@ -1,18 +1,21 @@
-.body-wrapper {
-  border: 1px solid black;
-  display: inline-block;
-  margin: 5px;
-  width: 300px;
-  padding: 3px;
-  -ms-border-radius: 5px;
-  border-radius: 5px;
-}
-
-.title {
+.mat-card-title {
   font-weight: bold;
+  font-size: 1.2rem;
   font-family: "Segoe UI", Arial;
 }
 
-.btn-container {
+.flow-item {
+  display: block;
+  margin: 10px;
+  width: 400px;
+}
+
+.mat-card-actions {
   display: flex;
+}
+
+li {
+  list-style: none;
+  font-size: 1rem;
+  font-family: "Segoe UI", Arial;
 }

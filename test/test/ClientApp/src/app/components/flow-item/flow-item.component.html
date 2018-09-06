@@ -1,14 +1,26 @@
-<div class="body-wrapper">
-  <p class="title">
-    {{this.flowModel.title}}
-  </p>
-  <div class="btn-container">
-    <button mat-raised-button color="warn" (click)="removeFlowHandler()">
-      Remove
+<mat-card class="flow-item">
+  <mat-card-header>
+    <mat-card-title>
+      {{this.model.title}}
+    </mat-card-title>
+    <mat-card-subtitle *ngIf="!this.expanded">
+      ({{this.model.steps.length}} steps)
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <ul *ngIf="this.expanded">
+      <li *ngFor="let item of this.model.steps; let I = index">
+        {{I + 1}}) {{item.stepType == 1 ? 'call to:' : 'apply rule:'}} {{item.title}}
+      </li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button (click)="toggleExpanded()">
+      <mat-icon matTooltip="show flow details" *ngIf="!this.expanded">expand_more</mat-icon>
+      <mat-icon matTooltip="hide flow details" *ngIf="this.expanded">expand_less</mat-icon>
     </button>
     <span class="fill-space"></span>
-    <button mat-raised-button color="primary">
-      Execute
-    </button>
-  </div>
-</div>
+    <button mat-button (click)="removeFlowHandler()"><mat-icon>delete</mat-icon>Remove</button>
+    <button mat-raised-button color="primary"><mat-icon>play_arrow</mat-icon>Execute</button>
+  </mat-card-actions>
+</mat-card>

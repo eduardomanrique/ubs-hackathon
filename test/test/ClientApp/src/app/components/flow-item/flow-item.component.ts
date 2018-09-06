@@ -9,7 +9,9 @@ import { FlowListService } from '../../services/flow-list.service';
 })
 export class FlowItemComponent implements OnInit {
 
-  @Input() flowModel: FlowModel;
+  @Input() model: FlowModel;
+
+  public expanded: boolean;
 
   constructor(private flowListService: FlowListService) { }
 
@@ -17,8 +19,12 @@ export class FlowItemComponent implements OnInit {
   }
 
   removeFlowHandler() {
-    if (confirm(`Are you sure you want to delete flow: ${this.flowModel.title} ?`)) {
-      this.flowListService.removeFlow(this.flowModel.title);
+    if (confirm(`Are you sure you want to delete flow: ${this.model.title} ?`)) {
+      this.flowListService.removeFlow(this.model.title);
     }
+  }
+
+  toggleExpanded() {
+    this.expanded = !this.expanded;
   }
 }
