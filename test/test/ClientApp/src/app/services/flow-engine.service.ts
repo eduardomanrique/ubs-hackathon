@@ -34,7 +34,7 @@ export class FlowEngineService {
             window.open(result.url);
           }else{
             console.log('nn ')
-            currentContent = (await response.toPromise())['data']['opportunities'];
+            currentContent = await response.toPromise();
           }
           break;
         case FlowStepTypes.RULE:

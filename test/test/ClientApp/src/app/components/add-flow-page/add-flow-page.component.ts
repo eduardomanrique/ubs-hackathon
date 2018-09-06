@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { LocalStorageService } from "../../services/local-storage.service";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FlowModel } from "../../models/flow.model";
 import { FlowStepModel } from "../../models/flowstep.model";
 import { FlowStepTypes } from "../../models/flowsteptypes.enum";
 import { FlowListService } from '../../services/flow-list.service';
+import { LocalStorageService } from "../../services/local-storage.service";
 
 @Component({
   selector: 'app-add-flow-page',
@@ -18,15 +18,15 @@ export class AddFlowPageComponent implements OnInit {
   public availableUrls: any[] = [
     {
       name: "BPX",
-      content: "http://www.mocky.io/v2/5b90ff993100008200939774"
+      url: "http://www.mocky.io/v2/5b91a5a83100007c00939a49"
     },
     {
       name: "Another application",
-      content: "http://www.mocky.io/v2/5b90ff993100008200939774"
+      url: "http://localhost:8080/converter/processData"
     },
     {
       name: "Export to Excel",
-      content: "http://www.mocky.io/v2/5b90ff993100008200939774"
+      url: "http://localhost:8080/converter/convertToExcel"
     }
   ];
 
@@ -89,7 +89,7 @@ export class AddFlowPageComponent implements OnInit {
 
     return err;
   }
-  
+
   saveBtnHandler() {
     const errors = this.validateModel();
     if (!errors.length) {
