@@ -34,7 +34,7 @@ dependencies {
 	compile('org.json:json:20180813')
 	compile('commons-io:commons-io:2.6')
 	compile('com.google.code.gson:gson:2.6.2')
-    compile('com.fasterxml.jackson.core:jackson-databind:2.9.4')
+    compile('org.projectlombok:lombok:1.18.2')
 
 	compile('org.springframework.batch:spring-batch-core:4.0.1.RELEASE')
 	compile("org.springframework.boot:spring-boot-starter-batch:2.0.2.RELEASE")
