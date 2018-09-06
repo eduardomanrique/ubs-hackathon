@@ -5,13 +5,13 @@ jdk:
   - oraclejdk8
 
 script:
-  - ./gradlew build --scan -s
+  - $HOME/Json2Excel/.gradlew build --scan -s
   
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+  - rm -f  $HOME/Json2Excel/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/Json2Excel/.gradle/caches/*/plugin-resolution/
 
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+    - $HOME/Json2Excel/.gradle/caches/
+    - $HOME/Json2Excel/.gradle/wrapper/
