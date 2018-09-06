@@ -2,10 +2,10 @@ import coffeScript from 'coffeescript';
 
 export default class RuleEngine {
 
-    rules: Array<object>;
+  rules: any[];
     script: string;
 
-    constructor(rules: Array<object>){
+    constructor(rules: any[]){
         this.rules = rules;
         let scripts = ['$entity.appliedRules = [];\n'];
         scripts = scripts.concat(this.rules.map((rule, index) => {
