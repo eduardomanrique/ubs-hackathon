@@ -1,4 +1,20 @@
-language: java
-node_js: "0.10"
-install: "npm install"
-script: "npm test"
+matrix:
+  include:
+    - language: java
+      install: true
+
+      before_install:
+        - cd Json2Excel
+
+      script:
+        - ./gradlew check
+
+    - language: node_js
+      node_js:
+        - "iojs"
+        - "7"
+      before_install:
+        - cd test/ClientApp
+
+      install: "npm install"
+      script: "npm test"
