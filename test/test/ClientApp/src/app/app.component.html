@@ -1,4 +1,4 @@
-<div *ngIf="!this.addPageVisible">
+<div>
   <mat-toolbar color="primary">
     <span class="d-none d-sm-block">UBS Flow</span>
 
@@ -12,7 +12,7 @@
 
   <app-flowlist></app-flowlist>
 
-  <button class="btn-fixed btn-pin-bottom btn-pin-right" mat-fab color="primary" (click)="addFlowBtnHandler()">
+  <button matTooltip="Add new flow" class="btn-fixed btn-pin-bottom btn-pin-right" mat-fab color="primary" (click)="addFlowBtnHandler()">
     <mat-icon>add</mat-icon>
   </button>
 </div>

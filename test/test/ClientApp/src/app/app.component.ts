@@ -21,6 +21,6 @@ export class AppComponent {
     this.addPageClass = "hide-animation";
     setTimeout(() => {
       this.addPageVisible = false;
-    }, 300);
+    }, 500);
   }
 }

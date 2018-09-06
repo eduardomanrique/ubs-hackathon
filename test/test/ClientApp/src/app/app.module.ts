@@ -6,7 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule, MatSidenavModule, MatToolbarModule, MatIconModule } from '@angular/material';
+import {
+  MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
+  MatSidenavModule, MatToolbarModule, MatIconModule, MatTooltipModule
+} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -33,6 +36,7 @@ import { AddFlowPageComponent } from './components/add-flow-page/add-flow-page.c
     MatToolbarModule,
     MatIconModule,
     MatFormFieldModule,
+    MatTooltipModule,
     MatInputModule,
     CommonModule,
     HttpModule,

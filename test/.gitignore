@@ -1,0 +1,14 @@
+.vs/
+node_modules/
+test.sln
+test/Pages/
+test/Controllers/
+test/Program.cs
+test/Startup.cs
+test/appsettings.json
+test/appsettings.Development.json
+test/libman.json
+test/test.csproj
+test/wwwroot/
+test/.gitignore
+package-lock.json

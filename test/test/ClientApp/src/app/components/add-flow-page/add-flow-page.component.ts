@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { LocalStorageService } from "../../services/local-storage.service";
 
 @Component({
   selector: 'app-add-flow-page',
@@ -9,7 +10,7 @@ export class AddFlowPageComponent implements OnInit {
 
   @Output() cancelButtonClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(private storageService: LocalStorageService) { }
 
   ngOnInit() {
   }
