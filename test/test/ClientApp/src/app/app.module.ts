@@ -1,22 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSidenavModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-
-import {
-  MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
-  MatSidenavModule, MatToolbarModule, MatIconModule, MatTooltipModule
-} from '@angular/material';
-
 import { AppComponent } from './app.component';
+import { AddFlowPageComponent } from './components/add-flow-page/add-flow-page.component';
+import { FlowItemComponent } from './components/flow-item/flow-item.component';
+import { FlowlistComponent } from './components/flowlist/flowlist.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { FlowlistComponent } from './components/flowlist/flowlist.component';
-import { FlowItemComponent } from './components/flow-item/flow-item.component';
-import { AddFlowPageComponent } from './components/add-flow-page/add-flow-page.component';
+import { RuleGroupComponent } from './components/rule-group/rule-group.component';
+
+
 
 @NgModule({
   declarations: [
@@ -25,7 +23,8 @@ import { AddFlowPageComponent } from './components/add-flow-page/add-flow-page.c
     NavMenuComponent,
     FlowlistComponent,
     FlowItemComponent,
-    AddFlowPageComponent
+    AddFlowPageComponent,
+    RuleGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +40,8 @@ import { AddFlowPageComponent } from './components/add-flow-page/add-flow-page.c
     CommonModule,
     HttpModule,
     FormsModule,
+    MatCardModule,
+    MatExpansionModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },

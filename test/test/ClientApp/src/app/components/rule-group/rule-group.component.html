@@ -1,0 +1,39 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>
+      <h3>Rules</h3>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-accordion class="accordeon-headers-align">
+      <mat-expansion-panel *ngFor="let rule of rules; let i = index" [expanded]="pos === i" (opened)="setPos(i)"
+        hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{rule.name}}
+          </mat-panel-title>
+          <button mat-icon-button color="secondary" (click)="removeRule(rule)">
+            <mat-icon aria-label="Remove rule">remove</mat-icon>
+          </button>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <input matInput placeholder="Name" name="name" onfocus="this.setSelectionRange(0, this.value.length)" (input)="textChangedHandler($event, rule)"
+            [value]="rule.name">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="When" name="condition" (input)="textChangedHandler($event, rule)" [value]="rule.condition">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <textarea matInput placeholder="Then" name="action" (input)="textChangedHandler($event, rule)" [value]="rule.action"></textarea>
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button color="primary" (click)="addRule()">
+      <mat-icon aria-label="Add rule">add</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -10,6 +10,8 @@
 
   </mat-toolbar>
 
+  <app-rule-group></app-rule-group>
+
   <app-flowlist></app-flowlist>
 
   <button matTooltip="Add new flow" class="btn-fixed btn-pin-bottom btn-pin-right" mat-fab color="primary" (click)="addFlowBtnHandler()">
@@ -19,6 +21,6 @@
 
 <div *ngIf="this.addPageVisible" [ngClass]="this.addPageClass">
   <app-add-flow-page (cancelButtonClick)="cancelBtnHandler()">
-  
+
   </app-add-flow-page>
 </div>
