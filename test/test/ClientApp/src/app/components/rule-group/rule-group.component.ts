@@ -50,16 +50,7 @@ $entity.xyz = 'XYZ'
   }
 
   removeRule(rule) {
-    //this.rules.splice(this.rules.indexOf(rule), 1);
-    const r = new RuleEngine(this.rules);
-    const e = {
-      name: 'Test3',
-      point: 2,
-      xyz: 'X',
-      evaluation: 0
-    };
-    r.exec(e)
-    console.log(JSON.stringify(e))
+    this.rules.splice(this.rules.indexOf(rule), 1);
   }
 
   ngOnInit() {
