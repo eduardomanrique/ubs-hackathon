@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
+import { DndModule } from 'ng2-dnd';
+
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule,
   MatExpansionModule, MatFormFieldModule, MatIconModule,
@@ -18,6 +21,7 @@ import { FlowlistComponent } from './components/flowlist/flowlist.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { RuleGroupComponent } from './components/rule-group/rule-group.component';
+import { SimpleRuleComponent } from './components/simple-rule/simple-rule.component';
 
 
 
@@ -29,7 +33,8 @@ import { RuleGroupComponent } from './components/rule-group/rule-group.component
     FlowlistComponent,
     FlowItemComponent,
     AddFlowPageComponent,
-    RuleGroupComponent
+    RuleGroupComponent,
+    SimpleRuleComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,8 @@ import { RuleGroupComponent } from './components/rule-group/rule-group.component
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: '**', redirectTo: 'home' }
-    ])
+    ]),
+    DndModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -27,4 +27,9 @@ export class FlowListService {
   getFlows():FlowModel[] {
     return this.flows;
   }
+
+  addFlow(model: FlowModel) {
+    this.flows.push(model);
+    this.storageService.setObj('flows', this.flows);
+  }
 }

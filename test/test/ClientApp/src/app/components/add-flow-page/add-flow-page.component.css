@@ -16,12 +16,16 @@
 .step-wrapper .mat-form-field {
   width: 90%;
 }
+
 .steps-container .step-card {
   width: 800px;
   display: block;
   margin-top: 10px;
 }
 
+  .steps-container .dnd-drag-over {
+    background: black;
+  }
 
 .steps-container {
   display: flex;

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FlowModel } from "../../models/flow.model";
 
 @Component({
   selector: 'app-rule-group',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rule-group.component.css']
 })
 export class RuleGroupComponent implements OnInit {
+
+  @Input() model: FlowModel;
 
   constructor() { }
 
@@ -36,6 +39,7 @@ export class RuleGroupComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
 }
