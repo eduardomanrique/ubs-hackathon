@@ -1,20 +1,33 @@
 matrix:
   include:
     - language: java
+      jdk:
+        - oraclejdk8
       install: true
 
       before_install:
         - cd Json2Excel
 
       script:
-        - chmod +x ./gradlew check
+        - gradle check
 
-    - language: node_js
+    - sudo: required
+      addons:
+        chrome: stable
+
+      language: node_js
       node_js:
-        - "iojs"
-        - "7"
+        - "8"
+      branches:
+        only:
+          - master
+
       before_install:
         - cd test/test/ClientApp
 
-      install: "npm install"
-      script: "npm test"
+      before_script:
+        - npm install -g @angular/cli
+
+      script:
+        - ng build --prod --aot
+        - ng test
