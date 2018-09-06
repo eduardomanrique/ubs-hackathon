@@ -199,7 +199,6 @@ public class XslWriter implements ItemStreamWriter<Data> {
             c.setCellValue(op.getExpenseCapSize());
             c.setCellStyle(cellStyle);
         }
-
     }
 
     @Override
