@@ -16,22 +16,20 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/endpoint01")
-public class EndPoint01 {
+@RequestMapping("/converter")
+public class ConverterController {
 
     private final ObjectMapper jsonMapper = new ObjectMapper();
 
     @Autowired
     private XslWriter xslWriter;
 
-    @PostMapping("/")
+    @PostMapping("/convertToExcel")
     public String convertToExcel(@Valid @RequestBody Data data, HttpServletResponse response) throws Exception {
-
-        System.out.println(data);
 
         xslWriter.open();
         xslWriter.write(data);
-        xslWriter.close(response.getOutputStream());
+        xslWriter.close();
 
         return "Done";
     }
