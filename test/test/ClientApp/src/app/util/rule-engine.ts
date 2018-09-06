@@ -9,7 +9,7 @@ export default class RuleEngine {
         this.rules = rules;
         let scripts = ['$entity.appliedRules = [];\n'];
         scripts = scripts.concat(this.rules.map((rule, index) => {
-            const script = `if ${rule['condition']}\n  $entity.appliedRules.push(${index})\n`;
+            const script = `if ${rule['content']}\n  $entity.appliedRules.push(${index})\n`;
             return coffeScript.compile(script);
         }));
         scripts = scripts.concat(this.rules.map((rule, index) => {
