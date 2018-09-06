@@ -28,4 +28,4 @@ by default-> 10
 
 
 ## Endpoint with Opportunities
-` curl -i -H "Accept: application/json" "http://mockbin.org/bin/de35bfe0-fede-4e51-b413-f1f4f362e8ba/view"`
+` curl -i "http://www.mocky.io/v2/5b90ff993100008200939774"`
