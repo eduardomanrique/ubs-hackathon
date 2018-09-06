@@ -1,0 +1,22 @@
+matrix:
+  include:
+    - language: java
+      install: true
+      jdk:
+        - oraclejdk8
+
+      before_script:
+        - cd Json2Excel
+
+      script:
+        - ./gradlew check
+
+    - language: node_js
+      node_js:
+        - "iojs"
+        - "7"
+      before_script:
+        - cd test/ClientApp
+
+      install: "npm install"
+      script: "npm test"
