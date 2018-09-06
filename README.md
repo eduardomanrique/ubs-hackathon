@@ -19,9 +19,9 @@ by default-> 10
 3. Multiply on  opportuninty.actualRevenueConvertedInUSD = Revenue brutto
 
 4. Apply taxes and timesheet koef to calculate revenue net: 
-	USA - 0.15 tax rate
-	UK - 0.23 tax rate
+	- USA - 0.15 tax rate
+	- UK - 0.23 tax rate
  
-  Revenue brutto = Revenue brutto*(1-tax rate)
+  - Revenue brutto = Revenue brutto*(1-tax rate)
 
 5. Generate report.
