@@ -18,15 +18,15 @@ export class AddFlowPageComponent implements OnInit {
   public availableUrls: any[] = [
     {
       name: "BPX",
-      url: "http://www.mocky.io/v2/5b90ff993100008200939774"
+      content: "http://www.mocky.io/v2/5b90ff993100008200939774"
     },
     {
-      name: "Google",
-      url: "www.oogle.com"
+      name: "Another application",
+      content: "http://www.mocky.io/v2/5b90ff993100008200939774"
     },
     {
-      name: "Test",
-      url: "some long long long url goes here"
+      name: "Export to Excel",
+      content: "http://www.mocky.io/v2/5b90ff993100008200939774"
     }
   ];
 
@@ -35,10 +35,8 @@ export class AddFlowPageComponent implements OnInit {
   ngOnInit() {
     this.model = new FlowModel("");
 
-    this.model.steps = [
-      new FlowStepModel("BPX", "http://www.mocky.io/v2/5b90ff993100008200939774", ""),
-      new FlowStepModel("BPX", "http://www.mocky.io/v2/5b90ff993100008200939774", "")
-    ];
+    this.model.steps = [];
+    this.addEmptyStepHandler('url');
   }
 
   titleChangedHandler(val: string) {
