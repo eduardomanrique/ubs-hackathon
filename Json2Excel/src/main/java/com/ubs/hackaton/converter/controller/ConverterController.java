@@ -16,23 +16,23 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/endpoint01")
-public class EndPoint01 {
+@RequestMapping("/converter")
+public class ConverterController {
 
     private final ObjectMapper jsonMapper = new ObjectMapper();
 
     @Autowired
     private XslWriter xslWriter;
 
-    @PostMapping("/")
-    public String convertToExcel(@Valid @RequestBody Data data, HttpServletResponse response) throws Exception {
-
-        System.out.println(data);
+    @PostMapping(value = "/convertToExcel", produces = "application/vnd.ms.excel")
+    public void convertToExcel(@Valid @RequestBody Data data, HttpServletResponse response) throws Exception {
 
         xslWriter.open();
         xslWriter.write(data);
-        xslWriter.close(response.getOutputStream());
 
-        return "Done";
+        xslWriter.write(response.getOutputStream());
+
+        response.setHeader("Content-Disposition", "attachment; filename=report.xls");
+        response.flushBuffer();
     }
 }
