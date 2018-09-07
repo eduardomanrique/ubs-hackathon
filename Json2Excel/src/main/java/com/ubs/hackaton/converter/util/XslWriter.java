@@ -18,6 +18,7 @@ import org.springframework.core.io.WritableResource;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -198,10 +199,11 @@ public class XslWriter {
         }
     }
 
-    public void write(OutputStream out) throws ItemStreamException {
+    public void write(File f) throws ItemStreamException {
 
         try {
-            wb.write(out);
+
+            wb.write(f);
             wb.close();
         } catch (Exception ex) {
             throw new ItemStreamException("Error writing to output file", ex);
