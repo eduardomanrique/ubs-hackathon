@@ -20,7 +20,14 @@ export default class RuleEngine {
         let scripts = ['$entity.appliedRules = [];\n'];
         scripts = scripts.concat(this.rules.map((rule, index) => {
             let script = Object.keys(e).map(k => `${k}=$entity.${k}`);
-            script.push(`if ${rule['content']}\n  $entity.appliedRules.push(${index})`);
+            let condition = rule['content']
+                .replace(/\sequals\s/g, '==')
+                .replace(/\sis\s*different\s*of\s/g, '!=')
+                .replace(/\sis\s*greater\s*than\s*or\s*equal\s*to\s/g, '>=')
+                .replace(/\sis\s*greater\s*than\s/g, '>')
+                .replace(/\sis\s*less\s*than\s*or\s*equal\s*to\s/g, '<=')
+                .replace(/\sis\s*less\s*than\s/g, '<');
+            script.push(`if ${condition}\n  $entity.appliedRules.push(${index})`);
             return coffeScript.compile(script.join('\n'));
         }));
         scripts = scripts.concat(this.rules.map((rule, index) => {
