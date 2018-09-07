@@ -1,29 +1,27 @@
-<mat-accordion class="accordeon-headers-align">
-  <mat-expansion-panel [expanded]="this.expanded"  hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <p class="title">{{this.model.title || 'Unnamed'}}</p> 
+<mat-expansion-panel [expanded]="this.expanded"  hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <p class="title"> <span class="subtitle">Apply rule:</span> <span class="api-name">{{this.model.title || 'Unnamed'}}</span> </p>
 
-        <span class="fill-space"></span>
+      <span class="fill-space"></span>
 
-        <button mat-icon-button>
-          <mat-icon matTooltip="Close" aria-label="Close" (click)="removeStepHandler(I)">clear</mat-icon>
-        </button>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-form-field>
-      <input matInput placeholder="Name" name="title"
-             onfocus="this.setSelectionRange(0, this.value.length)"
-             (input)="textChangedHandler($event)"
-             [value]="this.model.title">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <input matInput placeholder="When" name="content" (input)="textChangedHandler($event)" [value]="this.model.content">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <textarea matInput placeholder="Then" name="action" (input)="textChangedHandler($event)" [value]="this.model.action"></textarea>
-    </mat-form-field>
-  </mat-expansion-panel>
-</mat-accordion>
+      <button mat-icon-button>
+        <mat-icon matTooltip="Close" aria-label="Close" (click)="removeStepHandler(I)">clear</mat-icon>
+      </button>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <mat-form-field>
+    <input matInput placeholder="Name" name="title"
+           onfocus="this.setSelectionRange(0, this.value.length)"
+           (input)="textChangedHandler($event)"
+           [value]="this.model.title">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="When" name="content" (input)="textChangedHandler($event)" [value]="this.model.content">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <textarea matInput placeholder="Then" name="action" (input)="textChangedHandler($event)" [value]="this.model.action"></textarea>
+  </mat-form-field>
+</mat-expansion-panel>

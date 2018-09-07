@@ -17,23 +17,25 @@
 
   <div class="steps-container">
     <div *ngIf="this.model.steps.length === 0">Add steps to see the list</div>
-    <div *ngFor="let step of this.model.steps; let I = index">
+    <mat-accordion>
+      <div *ngFor="let step of this.model.steps; let I = index">
 
-      <app-apistep *ngIf="step.stepType == 1"
-                   class="step-card"
-                   (removeButtonClick)="removeStepHandler(I)"
-                   [model]="step">
-        
-      </app-apistep>
+        <app-apistep *ngIf="step.stepType == 1"
+                     class="step-card"
+                     (removeButtonClick)="removeStepHandler(I)"
+                     [model]="step">
 
-      <app-simple-rule *ngIf="step.stepType == 2"
-                       class="step-card"
-                       (removeButtonClick)="removeStepHandler(I)"
-                       [model]="step">
-        
-      </app-simple-rule>
-      
-    </div>
+        </app-apistep>
+
+        <app-simple-rule *ngIf="step.stepType == 2"
+                         class="step-card"
+                         (removeButtonClick)="removeStepHandler(I)"
+                         [model]="step">
+
+        </app-simple-rule>
+
+      </div>
+    </mat-accordion>
   </div>
 
   <button mat-raised-button color="warn" class="btn-fixed btn-pin-bottom btn-pin-right btn-right-1" (click)="addEmptyStepHandler('rule')">

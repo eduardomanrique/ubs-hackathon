@@ -11,18 +11,27 @@ export class ApistepComponent implements OnInit {
   @Input() model: FlowStepModel;
   @Output() removeButtonClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  public selected: { name: string, url: string, availableOptions: string };
+  public expanded = true;
+
   public availableUrls: any[] = [
     {
       name: "BPX",
-      url: "http://www.mocky.io/v2/5b922d8d3100008000939bed"
+      url: "http://www.mocky.io/v2/5b922d8d3100008000939bed",
+      availableOptions: ['banker advanced details', 'opportunity advanced details'],
+      optionsType: 'checkbox'
     },
     {
-      name: "Another application",
-      url: "http://localhost:8080/converter/processData"
+      name: "Another processing application",
+      url: "http://localhost:8080/converter/processData",
+      availableOptions: ['calculate currency', 'group by country'],
+      optionsType: 'checkbox'
     },
     {
-      name: "Export to Excel",
-      url: "http://localhost:8080/converter/convertToExcel"
+      name: "Export",
+      url: "http://localhost:8080/converter/convertToExcel",
+      availableOptions: ['Excel', 'Word'],
+      optionsType: 'radio'
     }
   ];
 
@@ -38,5 +47,7 @@ export class ApistepComponent implements OnInit {
   stepUrlChangedHandler(item) {
     this.model.content = item.url;
     this.model.title = item.name;
+
+    this.selected = item;
   }
 }
