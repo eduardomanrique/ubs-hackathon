@@ -23,10 +23,10 @@ export default class RuleEngine {
             let condition = rule['content']
                 .replace(/\sequals\s/g, '==')
                 .replace(/\sis\s*different\s*of\s/g, '!=')
-                .replace(/\sis\s*greater\s*than\s/g, '>')
                 .replace(/\sis\s*greater\s*than\s*or\s*equal\s*to\s/g, '>=')
-                .replace(/\sis\s*less\s*than\s/g, '<')
-                .replace(/\sis\s*less\s*than\s*or\s*equal\s*to\s/g, '<=');
+                .replace(/\sis\s*greater\s*than\s/g, '>')
+                .replace(/\sis\s*less\s*than\s*or\s*equal\s*to\s/g, '<=')
+                .replace(/\sis\s*less\s*than\s/g, '<');
             script.push(`if ${condition}\n  $entity.appliedRules.push(${index})`);
             return coffeScript.compile(script.join('\n'));
         }));
