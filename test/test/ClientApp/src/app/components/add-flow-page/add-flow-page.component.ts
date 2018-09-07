@@ -15,20 +15,6 @@ export class AddFlowPageComponent implements OnInit {
   @Output() cancelButtonClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public model: FlowModel;
-  public availableUrls: any[] = [
-    {
-      name: "BPX",
-      url: "http://www.mocky.io/v2/5b91a5a83100007c00939a49"
-    },
-    {
-      name: "Another application",
-      url: "http://localhost:8080/converter/processData"
-    },
-    {
-      name: "Export to Excel",
-      url: "http://localhost:8080/converter/convertToExcel"
-    }
-  ];
 
   constructor(private storageService: LocalStorageService, private flowListService: FlowListService) { }
 
@@ -46,12 +32,7 @@ export class AddFlowPageComponent implements OnInit {
   cancelBtnHandler() {
     this.cancelButtonClick.emit();
   }
-
-  stepUrlChangedHandler(item, step) {
-    step.content = item.url;
-    step.title = item.name;
-  }
-
+  
   removeStepHandler(index: number) {
     this.model.steps.splice(index, 1);
   }

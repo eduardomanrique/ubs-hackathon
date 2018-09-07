@@ -1,0 +1,16 @@
+<mat-card>
+  <div class="step-wrapper">
+          
+    <mat-form-field>
+      <mat-select placeholder="Select an application" (selectionChange)="stepUrlChangedHandler($event.value)">
+        <mat-option *ngFor="let item of this.availableUrls" [value]="item">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-icon-button>
+      <mat-icon matTooltip="Close" aria-label="Close" (click)="removeStepHandler(I)">clear</mat-icon>
+    </button>
+  </div>
+</mat-card>

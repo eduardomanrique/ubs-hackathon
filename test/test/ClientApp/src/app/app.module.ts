@@ -11,23 +11,19 @@ import { AppComponent } from './app.component';
 import { AddFlowPageComponent } from './components/add-flow-page/add-flow-page.component';
 import { FlowItemComponent } from './components/flow-item/flow-item.component';
 import { FlowlistComponent } from './components/flowlist/flowlist.component';
-import { HomeComponent } from './components/home/home.component';
-import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { RuleGroupComponent } from './components/rule-group/rule-group.component';
 import { SimpleRuleComponent } from './components/simple-rule/simple-rule.component';
-import { ConfirmdialogComponent } from './dialogs/confirmdialog/confirmdialog.component';
+import { ApistepComponent } from './components/apistep/apistep.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    NavMenuComponent,
     FlowlistComponent,
     FlowItemComponent,
     AddFlowPageComponent,
     RuleGroupComponent,
     SimpleRuleComponent,
-    ConfirmdialogComponent
+    ApistepComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +45,6 @@ import { ConfirmdialogComponent } from './dialogs/confirmdialog/confirmdialog.co
     MatExpansionModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
       { path: '**', redirectTo: 'home' }
     ]),
     HttpClientModule

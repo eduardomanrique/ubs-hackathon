@@ -1,0 +1,13 @@
+.step-wrapper input {
+  width: 500px;
+}
+
+.step-wrapper .mat-form-field {
+  width: 90%;
+}
+
+.steps-container .step-card {
+  width: 800px;
+  display: block;
+  margin-top: 10px;
+}
