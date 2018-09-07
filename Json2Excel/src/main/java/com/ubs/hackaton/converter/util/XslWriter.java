@@ -84,14 +84,14 @@ public class XslWriter {
         fields.add("Product ID");
         fields.add("Product Name");
         fields.add("Sub Product ID");
-        fields.add("Sub Product Name");
         fields.add("Industry ID");
         fields.add("Industry Name");
-        fields.add("Deal Size Converted in USD");
         fields.add("Country Code");
         fields.add("Net new Money");
         fields.add("Expense New Money");
         fields.add("Expense Cap Size");
+        fields.add("Currency");
+        fields.add("Amount");
 
         Cell c = r.createCell(0);
 
@@ -153,10 +153,6 @@ public class XslWriter {
             c.setCellStyle(cellStyle);
 
             c = r.createCell(columnIndex++);
-            c.setCellValue(op.getSubProductId());
-            c.setCellStyle(cellStyle);
-
-            c = r.createCell(columnIndex++);
             c.setCellValue(op.getSubProductName());
             c.setCellStyle(cellStyle);
 
@@ -166,10 +162,6 @@ public class XslWriter {
 
             c = r.createCell(columnIndex++);
             c.setCellValue(op.getIndustryName());
-            c.setCellStyle(cellStyle);
-
-            c = r.createCell(columnIndex++);
-            c.setCellValue(op.getDealSizeConvertedInUSD());
             c.setCellStyle(cellStyle);
 
             c = r.createCell(columnIndex++);
@@ -186,6 +178,14 @@ public class XslWriter {
 
             c = r.createCell(columnIndex++);
             c.setCellValue(op.getExpenseCapSize());
+            c.setCellStyle(cellStyle);
+
+            c = r.createCell(columnIndex++);
+            c.setCellValue(op.getCurrency());
+            c.setCellStyle(cellStyle);
+
+            c = r.createCell(columnIndex++);
+            c.setCellValue(op.getAmount());
             c.setCellStyle(cellStyle);
         }
     }
