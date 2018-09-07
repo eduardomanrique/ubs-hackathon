@@ -24,5 +24,8 @@ public class Opportunity {
     private double expenseCapSize;
     private List<InvolvedBanker> involvedBankers;
 
+    private String currency;
+    private Double amount;
+
     private String actualRevenueConvertedInUsd;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FlowStepModel } from "../../models/flowstep.model";
 
 @Component({
@@ -17,7 +17,7 @@ export class ApistepComponent implements OnInit {
   public availableUrls: any[] = [
     {
       name: "BPX",
-      url: "http://www.mocky.io/v2/5b91a5a83100007c00939a49",
+      url: "http://www.mocky.io/v2/5b922d8d3100008000939bed",
       availableOptions: ['banker advanced details', 'opportunity advanced details'],
       optionsType: 'checkbox'
     },
