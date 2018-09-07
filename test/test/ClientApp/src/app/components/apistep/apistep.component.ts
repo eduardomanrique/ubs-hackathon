@@ -33,6 +33,13 @@ export class ApistepComponent implements OnInit {
       availableOptions: ['Excel', 'Word'],
       optionsType: 'radio'
     }
+    ,
+    {
+      name: "Local file",
+      url: "http://localhost:8080/converter/convertToExcel",
+      availableOptions: ['Excel', 'Word'],
+      optionsType: 'radio'
+    }
   ];
 
   constructor() { }
