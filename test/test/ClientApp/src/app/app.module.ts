@@ -3,7 +3,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatSidenavModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
+import {
+  MatButtonModule, MatCardModule, MatCheckboxModule,
+  MatDialogModule, MatExpansionModule, MatFormFieldModule,
+  MatIconModule, MatInputModule, MatSelectModule, MatSidenavModule,
+  MatToolbarModule, MatTooltipModule, MatRadioModule
+} from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -30,6 +35,7 @@ import { ApistepComponent } from './components/apistep/apistep.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatRadioModule,
     MatSidenavModule,
     MatToolbarModule,
     MatSelectModule,

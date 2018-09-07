@@ -1,16 +1,41 @@
-<mat-card>
-  <div class="step-wrapper">
-          
-    <mat-form-field>
-      <mat-select placeholder="Select an application" (selectionChange)="stepUrlChangedHandler($event.value)">
-        <mat-option *ngFor="let item of this.availableUrls" [value]="item">
-          {{item.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+<mat-expansion-panel [expanded]="this.expanded" hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <p class="title"><span class="subtitle">Request to: </span> <span class="api-name">{{(this.selected && this.selected.name) || 'api not selected'}}</span> </p>
 
-    <button mat-icon-button>
-      <mat-icon matTooltip="Close" aria-label="Close" (click)="removeStepHandler(I)">clear</mat-icon>
-    </button>
+      <span class="fill-space"></span>
+
+      <button mat-icon-button>
+        <mat-icon matTooltip="Close" aria-label="Close" (click)="removeStepHandler(I)">clear</mat-icon>
+      </button>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <div class="step-wrapper">
+
+    <div class="card-body">
+      <mat-form-field>
+        <mat-select placeholder="Select an application" (selectionChange)="stepUrlChangedHandler($event.value)">
+          <mat-option *ngFor="let item of this.availableUrls" [value]="item">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="options-container" *ngIf="this.selected">
+        <div *ngIf="this.selected.optionsType=='checkbox'">
+          <mat-checkbox *ngFor="let item of this.selected.availableOptions" color="primary">{{item}}</mat-checkbox>
+        </div>
+        <div *ngIf="this.selected.optionsType=='radio'">
+          <mat-radio-group>
+            <mat-radio-button *ngFor="let item of this.selected.availableOptions"
+                              color="primary"
+                              value={{item}}>
+              {{item}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
   </div>
-</mat-card>
+</mat-expansion-panel>
