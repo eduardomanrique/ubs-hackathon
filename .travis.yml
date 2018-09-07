@@ -1,4 +1,38 @@
-language: node_js
-node_js:
-  - "iojs"
-  - "7"
+matrix:
+  include:
+    - language: java
+      install: true
+
+      before_install:
+        - cd Json2Excel
+
+      script:
+        - gradle check
+
+    - sudo: required
+      dist: trusty
+
+      cache:
+        directories:
+          - node_modules
+      addons:
+        chrome: stable
+
+      language: node_js
+      node_js:
+        - "8"
+      branches:
+        only:
+          - master
+
+      before_install:
+        - cd test/test/ClientApp
+
+      before_script:
+        - npm install -g @angular/cli
+
+      script:
+        - npm run lint
+        - npm run test:headless
+        - npm run build
+        - xvfb-run npm run e2e

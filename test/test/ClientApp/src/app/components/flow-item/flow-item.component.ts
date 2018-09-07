@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FlowModel } from "../../models/flow.model";
 import { FlowListService } from '../../services/flow-list.service';
+import { FlowEngineService } from '../../services/flow-engine.service';
 
 @Component({
   selector: 'app-flow-item',
@@ -13,7 +14,7 @@ export class FlowItemComponent implements OnInit {
 
   public expanded: boolean;
 
-  constructor(private flowListService: FlowListService) { }
+  constructor(private flowListService: FlowListService, private flowEngineServie: FlowEngineService) { }
 
   ngOnInit() {
   }
@@ -22,6 +23,10 @@ export class FlowItemComponent implements OnInit {
     if (confirm(`Are you sure you want to delete flow: ${this.model.title} ?`)) {
       this.flowListService.removeFlow(this.model.title);
     }
+  }
+
+  executeBtnHandler() {
+    this.flowEngineServie.execute(this.model);
   }
 
   toggleExpanded() {

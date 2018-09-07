@@ -5,3 +5,9 @@
   font-size: 1.4rem;
   font-family: "Segoe UI", Arial;
 }
+.mat-expansion-panel-header-title {
+  margin: 0;
+}
+.subtitle {
+  color: #c7c7c7;
+}

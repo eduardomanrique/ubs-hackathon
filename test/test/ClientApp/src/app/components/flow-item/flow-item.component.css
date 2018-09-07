@@ -5,7 +5,7 @@
 }
 
 .flow-item {
-  display: block;
+  display: inline-block;
   margin: 10px;
   width: 400px;
 }

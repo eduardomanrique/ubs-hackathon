@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { LocalStorageService } from "../../services/local-storage.service";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FlowModel } from "../../models/flow.model";
 import { FlowStepModel } from "../../models/flowstep.model";
 import { FlowStepTypes } from "../../models/flowsteptypes.enum";
 import { FlowListService } from '../../services/flow-list.service';
+import { LocalStorageService } from "../../services/local-storage.service";
 
 @Component({
   selector: 'app-add-flow-page',
@@ -15,30 +15,14 @@ export class AddFlowPageComponent implements OnInit {
   @Output() cancelButtonClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public model: FlowModel;
-  public availableUrls: any[] = [
-    {
-      name: "BPX",
-      url: "http://www.mocky.io/v2/5b90ff993100008200939774"
-    },
-    {
-      name: "Google",
-      url: "www.oogle.com"
-    },
-    {
-      name: "Test",
-      url: "some long long long url goes here"
-    }
-  ];
 
   constructor(private storageService: LocalStorageService, private flowListService: FlowListService) { }
 
   ngOnInit() {
     this.model = new FlowModel("");
 
-    this.model.steps = [
-      new FlowStepModel("BPX", "http://www.mocky.io/v2/5b90ff993100008200939774", ""),
-      new FlowStepModel("BPX", "http://www.mocky.io/v2/5b90ff993100008200939774", "")
-    ];
+    this.model.steps = [];
+    this.addEmptyStepHandler('url');
   }
 
   titleChangedHandler(val: string) {
@@ -48,12 +32,7 @@ export class AddFlowPageComponent implements OnInit {
   cancelBtnHandler() {
     this.cancelButtonClick.emit();
   }
-
-  stepUrlChangedHandler(item, step) {
-    step.content = item.url;
-    step.title = item.name;
-  }
-
+  
   removeStepHandler(index: number) {
     this.model.steps.splice(index, 1);
   }
@@ -91,7 +70,7 @@ export class AddFlowPageComponent implements OnInit {
 
     return err;
   }
-  
+
   saveBtnHandler() {
     const errors = this.validateModel();
     if (!errors.length) {
