@@ -14,12 +14,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.WritableResource;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-import java.io.BufferedOutputStream;
 import java.io.File;
-=======
->>>>>>> bc18fe00b5304a9b726d4413e36004c47eed2780
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
