@@ -1,26 +1,40 @@
-import { Component } from '@angular/core';
+import { FlowModel } from "./models/flow.model";
+import { FlowListService } from "./services/flow-list.service";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
-export class AppComponent {
-  title = 'ClientApp';
+export class AppComponent implements OnInit {
+  title = "ClientApp";
 
   public addPageVisible: boolean;
 
-  public addPageClass: string;
-  
+  public addPageClass: string = "display-none";
+
+  constructor(private flowListService: FlowListService) {}
+
   addFlowBtnHandler() {
-    this.addPageClass = "show-animation";
-    this.addPageVisible = true;
+    this.flowListService.navToNewFlow();
   }
 
-  cancelBtnHandler() {
-    this.addPageClass = "hide-animation";
-    setTimeout(() => {
-      this.addPageVisible = false;
-    }, 500);
+  ngOnInit(): void {
+    this.flowListService.EditFlowEvent.subscribe((model: FlowModel) => {
+      this.addPageClass = "show-animation";
+    });
+
+    this.flowListService.CancelFlowEvent.subscribe(() => {
+      this.addPageClass = "hide-animation";
+      setTimeout(() => {
+        this.addPageClass = "hide-animation display-none";
+      }, 500);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.flowListService.EditFlowEvent.unsubscribe();
+    this.flowListService.CancelFlowEvent.unsubscribe();
   }
 }

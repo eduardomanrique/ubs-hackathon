@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FlowModel } from "../../models/flow.model";
+import { FlowStepModel } from '../../models/flowstep.model';
 
 @Component({
   selector: 'app-simple-rule',
@@ -8,20 +8,21 @@ import { FlowModel } from "../../models/flow.model";
 })
 export class SimpleRuleComponent implements OnInit {
 
-  @Input() model: FlowModel;
+  @Input() model: FlowStepModel;
+  @Input() expanded: any;
   @Output() removeButtonClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  public expanded = true;
+  //public expanded = true;
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
   textChangedHandler(event) {
     const name = event.target.getAttribute('name');
     this.model[name] = event.target.value;
-    
   }
 
   removeStepHandler() {

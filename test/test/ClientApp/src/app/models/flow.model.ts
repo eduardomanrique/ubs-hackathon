@@ -1,4 +1,4 @@
-import { FlowStepModel } from "./flowstep.model"
+import { FlowStepModel } from './flowstep.model';
 
 export class FlowModel {
   public steps: FlowStepModel[] = [];

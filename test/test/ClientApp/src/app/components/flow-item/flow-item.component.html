@@ -1,6 +1,17 @@
 <mat-card class="flow-item">
   <mat-card-header>
-    <mat-card-title>
+    <div class="absolute">
+        <span class="fill-space"></span>
+
+        <mat-menu #appMenu="matMenu">
+          <button mat-menu-item (click)="editFlowHandler()">Edit</button>
+        </mat-menu>
+
+        <button style="float: right" mat-icon-button [matMenuTriggerFor]="appMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+    </div>
+    <mat-card-title class="card-title">
       {{this.model.title}}
     </mat-card-title>
     <mat-card-subtitle *ngIf="!this.expanded">
@@ -8,7 +19,7 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <ul *ngIf="this.expanded">
+    <ul *ngIf="this.expanded && this.model">
       <li *ngFor="let item of this.model.steps; let I = index">
         {{I + 1}}) {{item.stepType == 1 ? 'call to:' : 'apply rule:'}} {{item.title}}
       </li>
@@ -20,7 +31,11 @@
       <mat-icon matTooltip="hide flow details" *ngIf="this.expanded">expand_less</mat-icon>
     </button>
     <span class="fill-space"></span>
-    <button mat-button (click)="removeFlowHandler()"><mat-icon>delete</mat-icon>Remove</button>
-    <button mat-raised-button color="primary" (click)="executeBtnHandler()"><mat-icon>play_arrow</mat-icon>Execute</button>
+    <button mat-button (click)="removeFlowHandler()">
+      <mat-icon>delete</mat-icon>Remove
+    </button>
+    <button mat-raised-button color="primary" (click)="executeBtnHandler()">
+      <mat-icon>play_arrow</mat-icon>Execute
+    </button>
   </mat-card-actions>
 </mat-card>

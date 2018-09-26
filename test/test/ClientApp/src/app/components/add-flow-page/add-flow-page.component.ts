@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FlowModel } from "../../models/flow.model";
 import { FlowStepModel } from "../../models/flowstep.model";
 import { FlowStepTypes } from "../../models/flowsteptypes.enum";
@@ -12,17 +12,29 @@ import { LocalStorageService } from "../../services/local-storage.service";
 })
 export class AddFlowPageComponent implements OnInit {
 
-  @Output() cancelButtonClick: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   public model: FlowModel;
 
   constructor(private storageService: LocalStorageService, private flowListService: FlowListService) { }
 
-  ngOnInit() {
-    this.model = new FlowModel("");
+  private isEdit: boolean;
 
-    this.model.steps = [];
-    this.addEmptyStepHandler('url');
+  ngOnInit() {
+    this.flowListService.EditFlowEvent.subscribe((model: FlowModel) => {
+      if(model) {
+        this.isEdit = true;
+        this.model = model;
+      } else {
+        this.isEdit = false;
+        this.model = new FlowModel("");
+
+        this.model.steps = [];
+        this.addEmptyStepHandler('url');
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.flowListService.EditFlowEvent.unsubscribe();
   }
 
   titleChangedHandler(val: string) {
@@ -30,9 +42,9 @@ export class AddFlowPageComponent implements OnInit {
   }
 
   cancelBtnHandler() {
-    this.cancelButtonClick.emit();
+    this.flowListService.closeEditor();
   }
-  
+
   removeStepHandler(index: number) {
     this.model.steps.splice(index, 1);
   }
@@ -64,7 +76,7 @@ export class AddFlowPageComponent implements OnInit {
     if (this.model.steps.length == 0) {
       err.push("There should be at least 1 step in the flow");
     }
-    if (flows.filter(item => item.title === this.model.title).length) {
+    if (!this.isEdit && flows.filter(item => item.title === this.model.title).length) {
       err.push(`Flow with name: ${this.model.title} already exists, try to choose another name`);
     }
 
@@ -74,8 +86,8 @@ export class AddFlowPageComponent implements OnInit {
   saveBtnHandler() {
     const errors = this.validateModel();
     if (!errors.length) {
-      this.flowListService.addFlow(this.model);
-      this.cancelButtonClick.emit();
+      this.flowListService.addFlow(this.model, this.isEdit);
+      this.flowListService.closeEditor();
     } else {
       alert(errors.join("\n"));
     }

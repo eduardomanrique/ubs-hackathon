@@ -25,6 +25,10 @@ export class FlowItemComponent implements OnInit {
     }
   }
 
+  editFlowHandler() {
+    this.flowListService.navToEditFlow(this.model);
+  }
+
   executeBtnHandler() {
     this.flowEngineServie.execute(this.model);
   }

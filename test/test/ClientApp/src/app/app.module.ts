@@ -7,7 +7,7 @@ import {
   MatButtonModule, MatCardModule, MatCheckboxModule,
   MatDialogModule, MatExpansionModule, MatFormFieldModule,
   MatIconModule, MatInputModule, MatSelectModule, MatSidenavModule,
-  MatToolbarModule, MatTooltipModule, MatRadioModule
+  MatToolbarModule, MatTooltipModule, MatRadioModule, MatMenuModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,6 +48,7 @@ import { ApistepComponent } from './components/apistep/apistep.component';
     HttpModule,
     FormsModule,
     MatCardModule,
+    MatMenuModule,
     MatExpansionModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },

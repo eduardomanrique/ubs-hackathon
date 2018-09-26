@@ -10,7 +10,7 @@ export class LocalStorageService {
 
   constructor() { }
 
-  setObj(name:string, objValue: any) {
+  setObj(name: string, objValue: any) {
     this.storage.setItem(name, this.json.stringify(objValue));
   }
 
