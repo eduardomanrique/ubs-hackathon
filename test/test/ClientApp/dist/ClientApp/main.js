@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <mat-toolbar color=\"primary\">\r\n    <span class=\"d-none d-sm-block\">UBS Flow</span>\r\n\r\n    <span class=\"fill-space\"></span>\r\n  </mat-toolbar>\r\n  \r\n  <app-flowlist></app-flowlist>\r\n\r\n  <button matTooltip=\"Add new flow\" class=\"btn-fixed btn-pin-bottom btn-pin-right\" mat-fab color=\"primary\" (click)=\"addFlowBtnHandler()\">\r\n    <mat-icon>add</mat-icon>\r\n  </button>\r\n</div>\r\n\r\n<div *ngIf=\"this.addPageVisible\" [ngClass]=\"this.addPageClass\">\r\n  <app-add-flow-page (cancelButtonClick)=\"cancelBtnHandler()\">\r\n\r\n  </app-add-flow-page>\r\n</div>\r\n"
+module.exports = "<div>\r\n  <mat-toolbar color=\"primary\">\r\n    <span class=\"d-none d-sm-block\">UBS Flow</span>\r\n\r\n    <span class=\"fill-space\"></span>\r\n  </mat-toolbar>\r\n\r\n  <app-flowlist></app-flowlist>\r\n\r\n  <button matTooltip=\"Add new flow\" class=\"btn-fixed btn-pin-bottom btn-pin-right\" mat-fab color=\"primary\" (click)=\"addFlowBtnHandler()\">\r\n    <mat-icon>add</mat-icon>\r\n  </button>\r\n</div>\r\n\r\n<div [ngClass]=\"this.addPageClass\">\r\n  <app-add-flow-page>\r\n\r\n  </app-add-flow-page>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -55,35 +55,51 @@ module.exports = "<div>\r\n  <mat-toolbar color=\"primary\">\r\n    <span class=
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_flow_list_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/flow-list.service */ "./src/app/services/flow-list.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
-        this.title = 'ClientApp';
+    function AppComponent(flowListService) {
+        this.flowListService = flowListService;
+        this.title = "ClientApp";
+        this.addPageClass = "display-none";
     }
     AppComponent.prototype.addFlowBtnHandler = function () {
-        this.addPageClass = "show-animation";
-        this.addPageVisible = true;
+        this.flowListService.navToNewFlow();
     };
-    AppComponent.prototype.cancelBtnHandler = function () {
+    AppComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.addPageClass = "hide-animation";
-        setTimeout(function () {
-            _this.addPageVisible = false;
-        }, 500);
+        this.flowListService.EditFlowEvent.subscribe(function (model) {
+            _this.addPageClass = "show-animation";
+        });
+        this.flowListService.CancelFlowEvent.subscribe(function () {
+            _this.addPageClass = "hide-animation";
+            setTimeout(function () {
+                _this.addPageClass = "hide-animation display-none";
+            }, 500);
+        });
+    };
+    AppComponent.prototype.ngOnDestroy = function () {
+        this.flowListService.EditFlowEvent.unsubscribe();
+        this.flowListService.CancelFlowEvent.unsubscribe();
     };
     AppComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-root',
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: "app-root",
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [_services_flow_list_service__WEBPACK_IMPORTED_MODULE_0__["FlowListService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -172,6 +188,7 @@ var AppModule = /** @class */ (function () {
                 _angular_http__WEBPACK_IMPORTED_MODULE_4__["HttpModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatCardModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatMenuModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatExpansionModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterModule"].forRoot([
                     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -208,7 +225,7 @@ module.exports = ".page-wrapper {\r\n  background: #fff;\r\n  position: fixed;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"page-wrapper\">\r\n  <mat-toolbar color=\"warn\">\r\n    <mat-form-field class=\"search-form\">\r\n      <input type=\"search\" (input)=\"titleChangedHandler($event.target.value)\" placeholder=\"title\" matInput />\r\n    </mat-form-field>\r\n\r\n    <span class=\"fill-space\"></span>\r\n\r\n    <button mat-icon-button (click)=\"saveBtnHandler()\">\r\n      <mat-icon matTooltip=\"Save\" aria-label=\"Save\">save</mat-icon>\r\n    </button>\r\n\r\n    <button mat-icon-button (click)=\"cancelBtnHandler()\">\r\n      <mat-icon matTooltip=\"Close\" aria-label=\"Close\">clear</mat-icon>\r\n    </button>\r\n  </mat-toolbar>\r\n\r\n  <div class=\"steps-container\">\r\n    <div *ngIf=\"this.model.steps.length === 0\">Add steps to see the list</div>\r\n    <mat-accordion>\r\n      <div *ngFor=\"let step of this.model.steps; let I = index\">\r\n\r\n        <app-apistep *ngIf=\"step.stepType == 1\"\r\n                     class=\"step-card\"\r\n                     (removeButtonClick)=\"removeStepHandler(I)\"\r\n                     [model]=\"step\">\r\n\r\n        </app-apistep>\r\n\r\n        <app-simple-rule *ngIf=\"step.stepType == 2\"\r\n                         class=\"step-card\"\r\n                         (removeButtonClick)=\"removeStepHandler(I)\"\r\n                         [model]=\"step\">\r\n\r\n        </app-simple-rule>\r\n\r\n      </div>\r\n    </mat-accordion>\r\n  </div>\r\n\r\n  <button mat-raised-button color=\"warn\" class=\"btn-fixed btn-pin-bottom btn-pin-right btn-right-1\" (click)=\"addEmptyStepHandler('rule')\">\r\n    <mat-icon aria-label=\"rule\">notes</mat-icon> Add Rule\r\n  </button>\r\n\r\n  <button mat-raised-button color=\"warn\" class=\"btn-fixed btn-pin-bottom btn-pin-right btn-right-2\" (click)=\"addEmptyStepHandler('url')\">\r\n    <mat-icon aria-label=\"api\">cloud</mat-icon> Add Source\r\n  </button>\r\n</div>\r\n"
+module.exports = "<div class=\"page-wrapper\">\r\n  <mat-toolbar color=\"warn\">\r\n    <mat-form-field *ngIf=\"this.model\" class=\"search-form\">\r\n      <input type=\"text\" [value]=\"this.model.title\" (input)=\"titleChangedHandler($event.target.value)\" placeholder=\"title\"\r\n        matInput />\r\n    </mat-form-field>\r\n\r\n    <span class=\"fill-space\"></span>\r\n\r\n    <button mat-icon-button (click)=\"saveBtnHandler()\">\r\n      <mat-icon matTooltip=\"Save\" aria-label=\"Save\">save</mat-icon>\r\n    </button>\r\n\r\n    <button mat-icon-button (click)=\"cancelBtnHandler()\">\r\n      <mat-icon matTooltip=\"Close\" aria-label=\"Close\">clear</mat-icon>\r\n    </button>\r\n  </mat-toolbar>\r\n\r\n  <div *ngIf=\"this.model\" class=\"steps-container\">\r\n    <div *ngIf=\"this.model.steps.length === 0\">Add steps to see the list</div>\r\n    <mat-accordion multi=\"false\">\r\n      <div *ngFor=\"let step of this.model.steps; let I = index\">\r\n\r\n        <app-apistep *ngIf=\"step.stepType == 1\" class=\"step-card\" [expanded]=\"step\" (removeButtonClick)=\"removeStepHandler(I)\"\r\n          [model]=\"step\">\r\n\r\n        </app-apistep>\r\n\r\n        <app-simple-rule *ngIf=\"step.stepType == 2\" [expanded]=\"step\" class=\"step-card\" (removeButtonClick)=\"removeStepHandler(I)\"\r\n          [model]=\"step\">\r\n\r\n        </app-simple-rule>\r\n\r\n      </div>\r\n    </mat-accordion>\r\n  </div>\r\n\r\n  <button mat-raised-button color=\"warn\" class=\"btn-fixed btn-pin-bottom btn-pin-right btn-right-1\" (click)=\"addEmptyStepHandler('rule')\">\r\n    <mat-icon aria-label=\"rule\">notes</mat-icon> Add Rule\r\n  </button>\r\n\r\n  <button mat-raised-button color=\"warn\" class=\"btn-fixed btn-pin-bottom btn-pin-right btn-right-2\" (click)=\"addEmptyStepHandler('url')\">\r\n    <mat-icon aria-label=\"api\">cloud</mat-icon> Add Source\r\n  </button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -247,18 +264,30 @@ var AddFlowPageComponent = /** @class */ (function () {
     function AddFlowPageComponent(storageService, flowListService) {
         this.storageService = storageService;
         this.flowListService = flowListService;
-        this.cancelButtonClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     AddFlowPageComponent.prototype.ngOnInit = function () {
-        this.model = new _models_flow_model__WEBPACK_IMPORTED_MODULE_1__["FlowModel"]("");
-        this.model.steps = [];
-        this.addEmptyStepHandler('url');
+        var _this = this;
+        this.flowListService.EditFlowEvent.subscribe(function (model) {
+            if (model) {
+                _this.isEdit = true;
+                _this.model = model;
+            }
+            else {
+                _this.isEdit = false;
+                _this.model = new _models_flow_model__WEBPACK_IMPORTED_MODULE_1__["FlowModel"]("");
+                _this.model.steps = [];
+                _this.addEmptyStepHandler('url');
+            }
+        });
+    };
+    AddFlowPageComponent.prototype.ngOnDestroy = function () {
+        this.flowListService.EditFlowEvent.unsubscribe();
     };
     AddFlowPageComponent.prototype.titleChangedHandler = function (val) {
         this.model.title = val;
     };
     AddFlowPageComponent.prototype.cancelBtnHandler = function () {
-        this.cancelButtonClick.emit();
+        this.flowListService.closeEditor();
     };
     AddFlowPageComponent.prototype.removeStepHandler = function (index) {
         this.model.steps.splice(index, 1);
@@ -288,7 +317,7 @@ var AddFlowPageComponent = /** @class */ (function () {
         if (this.model.steps.length == 0) {
             err.push("There should be at least 1 step in the flow");
         }
-        if (flows.filter(function (item) { return item.title === _this.model.title; }).length) {
+        if (!this.isEdit && flows.filter(function (item) { return item.title === _this.model.title; }).length) {
             err.push("Flow with name: " + this.model.title + " already exists, try to choose another name");
         }
         return err;
@@ -296,17 +325,13 @@ var AddFlowPageComponent = /** @class */ (function () {
     AddFlowPageComponent.prototype.saveBtnHandler = function () {
         var errors = this.validateModel();
         if (!errors.length) {
-            this.flowListService.addFlow(this.model);
-            this.cancelButtonClick.emit();
+            this.flowListService.addFlow(this.model, this.isEdit);
+            this.flowListService.closeEditor();
         }
         else {
             alert(errors.join("\n"));
         }
     };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
-        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
-    ], AddFlowPageComponent.prototype, "cancelButtonClick", void 0);
     AddFlowPageComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-add-flow-page',
@@ -340,7 +365,7 @@ module.exports = ".step-wrapper {\r\n  display: flex;\r\n  flex-direction: row;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-expansion-panel [expanded]=\"this.expanded\" hideToggle>\r\n  <mat-expansion-panel-header>\r\n    <mat-panel-title>\r\n      <p class=\"title\"><span class=\"subtitle\">Request to: </span> <span class=\"api-name\">{{(this.selected && this.selected.name) || 'api not selected'}}</span> </p>\r\n\r\n      <span class=\"fill-space\"></span>\r\n\r\n      <button mat-icon-button>\r\n        <mat-icon matTooltip=\"Close\" aria-label=\"Close\" (click)=\"removeStepHandler(I)\">clear</mat-icon>\r\n      </button>\r\n    </mat-panel-title>\r\n  </mat-expansion-panel-header>\r\n\r\n  <div class=\"step-wrapper\">\r\n\r\n    <div class=\"card-body\">\r\n      <mat-form-field>\r\n        <mat-select placeholder=\"Select an application\" (selectionChange)=\"stepUrlChangedHandler($event.value)\">\r\n          <mat-option *ngFor=\"let item of this.availableUrls\" [value]=\"item\">\r\n            {{item.name}}\r\n          </mat-option>\r\n        </mat-select>\r\n      </mat-form-field>\r\n\r\n      <div class=\"options-container\" *ngIf=\"this.selected\">\r\n        <div *ngIf=\"this.selected.optionsType=='checkbox'\">\r\n          <mat-checkbox *ngFor=\"let item of this.selected.availableOptions\" color=\"primary\">{{item}}</mat-checkbox>\r\n        </div>\r\n        <div *ngIf=\"this.selected.optionsType=='radio'\">\r\n          <mat-radio-group>\r\n            <mat-radio-button *ngFor=\"let item of this.selected.availableOptions\"\r\n                              color=\"primary\"\r\n                              value={{item}}>\r\n              {{item}}\r\n            </mat-radio-button>\r\n          </mat-radio-group>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</mat-expansion-panel>\r\n"
+module.exports = "<mat-expansion-panel hideToggle>\r\n  <mat-expansion-panel-header>\r\n    <mat-panel-title>\r\n      <p class=\"title\"><span class=\"subtitle\">Request to: </span> <span class=\"api-name\">{{(this.selected && this.selected.name) || 'api not selected'}}</span> </p>\r\n\r\n      <span class=\"fill-space\"></span>\r\n\r\n      <button mat-icon-button>\r\n        <mat-icon matTooltip=\"Close\" aria-label=\"Close\" (click)=\"removeStepHandler()\">clear</mat-icon>\r\n      </button>\r\n    </mat-panel-title>\r\n  </mat-expansion-panel-header>\r\n\r\n  <div class=\"step-wrapper\">\r\n\r\n    <div class=\"card-body\">\r\n      <mat-form-field>\r\n        <mat-select placeholder=\"Select an application\" (selectionChange)=\"stepUrlChangedHandler($event.value)\">\r\n          <mat-option *ngFor=\"let item of this.availableUrls\" [value]=\"item\">\r\n            {{item.name}}\r\n          </mat-option>\r\n        </mat-select>\r\n      </mat-form-field>\r\n\r\n      <div class=\"options-container\" *ngIf=\"this.selected\">\r\n          <div *ngIf=\"this.selected.optionsType=='checkbox'\">\r\n            <mat-checkbox *ngFor=\"let item of this.selected.availableOptions\" color=\"primary\">{{item}}</mat-checkbox>\r\n          </div>\r\n          <div *ngIf=\"this.selected.optionsType=='radio'\">\r\n            <mat-radio-group>\r\n              <mat-radio-button *ngFor=\"let item of this.selected.availableOptions\"\r\n                                color=\"primary\"\r\n                                value={{item}}>\r\n                {{item}}\r\n              </mat-radio-button>\r\n            </mat-radio-group>\r\n          </div>\r\n        </div>\r\n    </div>\r\n  </div>\r\n</mat-expansion-panel>\r\n"
 
 /***/ }),
 
@@ -370,7 +395,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var ApistepComponent = /** @class */ (function () {
     function ApistepComponent() {
         this.removeButtonClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        this.expanded = true;
+        //public expanded = true;
         this.availableUrls = [
             {
                 name: "BPX",
@@ -399,6 +424,11 @@ var ApistepComponent = /** @class */ (function () {
         ];
     }
     ApistepComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var item = this.availableUrls.filter(function (item) { return item.name == _this.model.title && item.url == _this.model.content; })[0];
+        if (item) {
+            this.selected = item;
+        }
     };
     ApistepComponent.prototype.removeStepHandler = function () {
         this.removeButtonClick.emit();
@@ -412,6 +442,10 @@ var ApistepComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", _models_flowstep_model__WEBPACK_IMPORTED_MODULE_1__["FlowStepModel"])
     ], ApistepComponent.prototype, "model", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ApistepComponent.prototype, "expanded", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
@@ -438,7 +472,7 @@ var ApistepComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".mat-card-title {\r\n  font-weight: bold;\r\n  font-size: 1.2rem;\r\n  font-family: \"Segoe UI\", Arial;\r\n}\r\n\r\n.flow-item {\r\n  display: inline-block;\r\n  margin: 10px;\r\n  width: 400px;\r\n}\r\n\r\n.mat-card-actions {\r\n  display: flex;\r\n}\r\n\r\nli {\r\n  list-style: none;\r\n  font-size: 1rem;\r\n  font-family: \"Segoe UI\", Arial;\r\n}\r\n"
+module.exports = ".mat-card-title {\r\n  font-weight: bold;\r\n  font-size: 1.2rem;\r\n  font-family: \"Segoe UI\", Arial;\r\n  width: 100%;\r\n}\r\n\r\n.absolute {\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 100%;\r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.flow-item {\r\n  display: inline-block;\r\n  margin: 10px;\r\n  width: 400px;\r\n}\r\n\r\n.mat-card-actions {\r\n  display: flex;\r\n}\r\n\r\nli {\r\n  list-style: none;\r\n  font-size: 1rem;\r\n  font-family: \"Segoe UI\", Arial;\r\n}\r\n"
 
 /***/ }),
 
@@ -449,7 +483,7 @@ module.exports = ".mat-card-title {\r\n  font-weight: bold;\r\n  font-size: 1.2r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"flow-item\">\r\n  <mat-card-header>\r\n    <mat-card-title>\r\n      {{this.model.title}}\r\n    </mat-card-title>\r\n    <mat-card-subtitle *ngIf=\"!this.expanded\">\r\n      ({{this.model.steps.length}} steps)\r\n    </mat-card-subtitle>\r\n  </mat-card-header>\r\n  <mat-card-content>\r\n    <ul *ngIf=\"this.expanded\">\r\n      <li *ngFor=\"let item of this.model.steps; let I = index\">\r\n        {{I + 1}}) {{item.stepType == 1 ? 'call to:' : 'apply rule:'}} {{item.title}}\r\n      </li>\r\n    </ul>\r\n  </mat-card-content>\r\n  <mat-card-actions>\r\n    <button mat-icon-button (click)=\"toggleExpanded()\">\r\n      <mat-icon matTooltip=\"show flow details\" *ngIf=\"!this.expanded\">expand_more</mat-icon>\r\n      <mat-icon matTooltip=\"hide flow details\" *ngIf=\"this.expanded\">expand_less</mat-icon>\r\n    </button>\r\n    <span class=\"fill-space\"></span>\r\n    <button mat-button (click)=\"removeFlowHandler()\"><mat-icon>delete</mat-icon>Remove</button>\r\n    <button mat-raised-button color=\"primary\" (click)=\"executeBtnHandler()\"><mat-icon>play_arrow</mat-icon>Execute</button>\r\n  </mat-card-actions>\r\n</mat-card>\r\n"
+module.exports = "<mat-card class=\"flow-item\">\r\n  <mat-card-header>\r\n    <div class=\"absolute\">\r\n        <span class=\"fill-space\"></span>\r\n\r\n        <mat-menu #appMenu=\"matMenu\">\r\n          <button mat-menu-item (click)=\"editFlowHandler()\">Edit</button>\r\n        </mat-menu>\r\n\r\n        <button style=\"float: right\" mat-icon-button [matMenuTriggerFor]=\"appMenu\">\r\n          <mat-icon>more_vert</mat-icon>\r\n        </button>\r\n    </div>\r\n    <mat-card-title class=\"card-title\">\r\n      {{this.model.title}}\r\n    </mat-card-title>\r\n    <mat-card-subtitle *ngIf=\"!this.expanded\">\r\n      ({{this.model.steps.length}} steps)\r\n    </mat-card-subtitle>\r\n  </mat-card-header>\r\n  <mat-card-content>\r\n    <ul *ngIf=\"this.expanded && this.model\">\r\n      <li *ngFor=\"let item of this.model.steps; let I = index\">\r\n        {{I + 1}}) {{item.stepType == 1 ? 'call to:' : 'apply rule:'}} {{item.title}}\r\n      </li>\r\n    </ul>\r\n  </mat-card-content>\r\n  <mat-card-actions>\r\n    <button mat-icon-button (click)=\"toggleExpanded()\">\r\n      <mat-icon matTooltip=\"show flow details\" *ngIf=\"!this.expanded\">expand_more</mat-icon>\r\n      <mat-icon matTooltip=\"hide flow details\" *ngIf=\"this.expanded\">expand_less</mat-icon>\r\n    </button>\r\n    <span class=\"fill-space\"></span>\r\n    <button mat-button (click)=\"removeFlowHandler()\">\r\n      <mat-icon>delete</mat-icon>Remove\r\n    </button>\r\n    <button mat-raised-button color=\"primary\" (click)=\"executeBtnHandler()\">\r\n      <mat-icon>play_arrow</mat-icon>Execute\r\n    </button>\r\n  </mat-card-actions>\r\n</mat-card>\r\n"
 
 /***/ }),
 
@@ -491,6 +525,9 @@ var FlowItemComponent = /** @class */ (function () {
         if (confirm("Are you sure you want to delete flow: " + this.model.title + " ?")) {
             this.flowListService.removeFlow(this.model.title);
         }
+    };
+    FlowItemComponent.prototype.editFlowHandler = function () {
+        this.flowListService.navToEditFlow(this.model);
     };
     FlowItemComponent.prototype.executeBtnHandler = function () {
         this.flowEngineServie.execute(this.model);
@@ -707,7 +744,7 @@ module.exports = ".mat-form-field {\r\n  width: 100%;\r\n}\r\n.title {\r\n  font
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-expansion-panel [expanded]=\"this.expanded\"  hideToggle>\r\n  <mat-expansion-panel-header>\r\n    <mat-panel-title>\r\n      <p class=\"title\"> <span class=\"subtitle\">Apply rule:</span> <span class=\"api-name\">{{this.model.title || 'Unnamed'}}</span> </p>\r\n\r\n      <span class=\"fill-space\"></span>\r\n\r\n      <button mat-icon-button>\r\n        <mat-icon matTooltip=\"Close\" aria-label=\"Close\" (click)=\"removeStepHandler(I)\">clear</mat-icon>\r\n      </button>\r\n    </mat-panel-title>\r\n  </mat-expansion-panel-header>\r\n  <mat-form-field>\r\n    <input matInput placeholder=\"Name\" name=\"title\"\r\n           onfocus=\"this.setSelectionRange(0, this.value.length)\"\r\n           (input)=\"textChangedHandler($event)\"\r\n           [value]=\"this.model.title\">\r\n  </mat-form-field>\r\n  <br>\r\n  <mat-form-field>\r\n    <input matInput placeholder=\"When\" name=\"content\" (input)=\"textChangedHandler($event)\" [value]=\"this.model.content\">\r\n  </mat-form-field>\r\n  <br>\r\n  <mat-form-field>\r\n    <textarea matInput placeholder=\"Then\" name=\"action\" (input)=\"textChangedHandler($event)\" [value]=\"this.model.action\"></textarea>\r\n  </mat-form-field>\r\n</mat-expansion-panel>\r\n"
+module.exports = "<mat-expansion-panel hideToggle>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        <p class=\"title\"> <span class=\"subtitle\">Apply rule:</span> <span class=\"api-name\">{{this.model.title || 'Unnamed'}}</span> </p>\r\n\r\n        <span class=\"fill-space\"></span>\r\n\r\n        <button mat-icon-button>\r\n          <mat-icon matTooltip=\"Close\" aria-label=\"Close\" (click)=\"removeStepHandler()\">clear</mat-icon>\r\n        </button>\r\n      </mat-panel-title>\r\n    </mat-expansion-panel-header>\r\n    <mat-form-field>\r\n      <input matInput placeholder=\"Name\" name=\"title\"\r\n             onfocus=\"this.setSelectionRange(0, this.value.length)\"\r\n             (input)=\"textChangedHandler($event)\"\r\n             [value]=\"this.model.title\">\r\n    </mat-form-field>\r\n    <br>\r\n    <mat-form-field>\r\n      <input matInput placeholder=\"When\" name=\"content\" (input)=\"textChangedHandler($event)\" [value]=\"this.model.content\">\r\n    </mat-form-field>\r\n    <br>\r\n    <mat-form-field>\r\n      <textarea matInput placeholder=\"Then\" name=\"action\" (input)=\"textChangedHandler($event)\" [value]=\"this.model.action\"></textarea>\r\n    </mat-form-field>\r\n  </mat-expansion-panel>\r\n"
 
 /***/ }),
 
@@ -722,7 +759,7 @@ module.exports = "<mat-expansion-panel [expanded]=\"this.expanded\"  hideToggle>
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SimpleRuleComponent", function() { return SimpleRuleComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _models_flow_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/flow.model */ "./src/app/models/flow.model.ts");
+/* harmony import */ var _models_flowstep_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/flowstep.model */ "./src/app/models/flowstep.model.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -735,9 +772,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var SimpleRuleComponent = /** @class */ (function () {
+    //public expanded = true;
     function SimpleRuleComponent() {
         this.removeButtonClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        this.expanded = true;
     }
     SimpleRuleComponent.prototype.ngOnInit = function () {
     };
@@ -750,8 +787,12 @@ var SimpleRuleComponent = /** @class */ (function () {
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", _models_flow_model__WEBPACK_IMPORTED_MODULE_1__["FlowModel"])
+        __metadata("design:type", _models_flowstep_model__WEBPACK_IMPORTED_MODULE_1__["FlowStepModel"])
     ], SimpleRuleComponent.prototype, "model", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], SimpleRuleComponent.prototype, "expanded", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
@@ -925,13 +966,17 @@ var FlowEngineService = /** @class */ (function () {
                                         }
                                         return [3 /*break*/, 7];
                                     case 1:
-                                        console.log("REQUEST TO API: " + item.content);
+                                        console.log('REQUEST TO API: ' + item.content);
                                         response = void 0;
                                         if (i === 0) {
                                             response = this_1.http.get(item.content);
                                         }
                                         else {
-                                            response = this_1.http.post(item.content, JSON.stringify(currentContent), { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpHeaders"]().set('Content-Type', 'application/json') });
+                                            response = this_1.http
+                                                .post(item.content, JSON.stringify(currentContent), {
+                                                headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpHeaders"]()
+                                                    .set('Content-Type', 'application/json')
+                                            });
                                         }
                                         console.log(i + ': ' + response + ' ' + model.steps.length);
                                         if (!(i === model.steps.length - 1)) return [3 /*break*/, 3];
@@ -951,7 +996,7 @@ var FlowEngineService = /** @class */ (function () {
                                         _b.label = 5;
                                     case 5: return [3 /*break*/, 8];
                                     case 6:
-                                        console.log("APPLY RULE");
+                                        console.log('APPLY RULE');
                                         engine_1 = new _util_rule_engine__WEBPACK_IMPORTED_MODULE_3__["default"]([item]);
                                         currentContent.forEach(function (entity) { return engine_1.exec(entity); });
                                         return [3 /*break*/, 8];
@@ -1018,30 +1063,51 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var FlowListService = /** @class */ (function () {
     function FlowListService(storageService) {
         this.storageService = storageService;
-        var data = this.storageService.getObj('flows');
+        this.EditFlowEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.CancelFlowEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        var data = this.storageService.getObj("flows");
         if (!data || !data.length) {
             data = [];
-            this.storageService.setObj('flows', data);
+            this.storageService.setObj("flows", data);
         }
         this.flows = data;
     }
+    FlowListService.prototype.closeEditor = function () {
+        this.CancelFlowEvent.emit();
+    };
+    FlowListService.prototype.navToNewFlow = function () {
+        this.EditFlowEvent.emit(null);
+    };
+    FlowListService.prototype.navToEditFlow = function (model) {
+        this.EditFlowEvent.emit(model);
+    };
     FlowListService.prototype.getFlows = function () {
         return this.flows;
     };
-    FlowListService.prototype.addFlow = function (model) {
-        this.flows.push(model);
-        this.storageService.setObj('flows', this.flows);
+    FlowListService.prototype.addFlow = function (model, replace) {
+        if (replace === void 0) { replace = false; }
+        var index = this.flows.findIndex(function (item) { return item.title == model.title; });
+        if (replace && index >= 0) {
+            this.flows.splice(index, 1, model);
+            this.storageService.setObj("flows", this.flows);
+        }
+        else {
+            if (index < 0) {
+                this.flows.push(model);
+                this.storageService.setObj("flows", this.flows);
+            }
+        }
     };
     FlowListService.prototype.removeFlow = function (title) {
         var index = this.flows.findIndex(function (flow) { return flow.title === title; });
         if (index >= 0) {
             this.flows.splice(index, 1);
-            this.storageService.setObj('flows', this.flows);
+            this.storageService.setObj("flows", this.flows);
         }
     };
     FlowListService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
+            providedIn: "root"
         }),
         __metadata("design:paramtypes", [_local_storage_service__WEBPACK_IMPORTED_MODULE_1__["LocalStorageService"]])
     ], FlowListService);
